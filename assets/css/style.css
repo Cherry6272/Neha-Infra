@@ -802,6 +802,11 @@ img {
   transition: transform 500ms ease, opacity 500ms ease, -webkit-transform 500ms ease;
 }
 
+.search-popup.active {
+  -webkit-transform: translateY(0);
+  transform: translateY(0);
+}
+
 
 /* Fix for Neha Infrastructures Rebranding - Ensuring visibility and logo scale */
 .logo-box img, 

@@ -133,7 +133,7 @@
                                             </div>
                                             <div class="content-box">
                                                 <p>Sahakarnagar, Bengaluru</p>
-                                                <h4>Melbourne, Australia</h4>
+                                                <h4>Karnataka, India</h4>
                                             </div>
                                         </div>
                                     </li>
@@ -198,17 +198,17 @@
                                                     <a href="#">Services</a>
                                                     <ul>
                                                         <li><a href="services.html">Services</a></li>
-                                                        <li><a href="bridge-construction.html">Bridge Construction</a>
+                                                        <li><a href="bridge-construction.html">Bridge & Highway</a>
                                                         </li>
-                                                        <li><a href="petroleum-refinery.html">Petroleum Refinery</a>
+                                                        <li><a href="petroleum-refinery.html">Industrial Facilities</a>
                                                         </li>
-                                                        <li><a href="chemical-industry.html">Chemical Industry</a>
+                                                        <li><a href="chemical-industry.html">Commercial Buildings</a>
                                                         </li>
-                                                        <li><a href="power-energy.html">Power Energy</a>
+                                                        <li><a href="power-energy.html">Heavy Civil Works</a>
                                                         </li>
-                                                        <li><a href="mechanical-works.html">Mechanical Works</a>
+                                                        <li><a href="mechanical-works.html">Structural Steel Works</a>
                                                         </li>
-                                                        <li><a href="civil-engineering.html">Civil Engineering</a>
+                                                        <li><a href="civil-engineering.html">Civil Infrastructure</a>
                                                         </li>
                                                     </ul>
                                                 </li>
@@ -270,11 +270,11 @@
             </div>
             <div class="container">
                 <div class="page-header__inner">
-                    <h2>Mechanical Works</h2>
+                    <h2>Structural Steel Works</h2>
                     <ul class="thm-breadcrumb">
                         <li><a href="index.html">Home</a></li>
                         <li><span class="icon-caret"></span></li>
-                        <li>Mechanical Works</li>
+                        <li>Structural Steel Works</li>
                     </ul>
                 </div>
             </div>
@@ -302,17 +302,17 @@
                             <div class="services-details__single sidebar__category">
                                 <h3 class="sidebar__title">Category</h3>
                                 <ul class="sidebar__category-list">
-                                    <li><a href="bridge-construction.html">Bridge Construction <span
+                                    <li><a href="bridge-construction.html">Bridge & Highway <span
                                                 class="icon-caret"></span></a></li>
-                                    <li><a href="petroleum-refinery.html">Petroleum Refinery
+                                    <li><a href="petroleum-refinery.html">Industrial Facilities
                                             <span class="icon-caret"></span></a></li>
-                                    <li><a href="chemical-industry.html">Chemical Industry <span
+                                    <li><a href="chemical-industry.html">Commercial Buildings <span
                                                 class="icon-caret"></span></a></li>
-                                    <li><a href="power-energy.html">Power Energy <span class="icon-caret"></span></a>
+                                    <li><a href="power-energy.html">Heavy Civil Works <span class="icon-caret"></span></a>
                                     </li>
-                                    <li class="active"><a href="#">Mechanical Works <span class="icon-caret"></span></a>
+                                    <li class="active"><a href="#">Structural Steel Works <span class="icon-caret"></span></a>
                                     </li>
-                                    <li><a href="civil-engineering.html">Civil Engineering <span
+                                    <li><a href="civil-engineering.html">Civil Infrastructure <span
                                                 class="icon-caret"></span></a></li>
                                 </ul>
                             </div>
@@ -404,7 +404,7 @@
                             </div>
 
                             <div class="services-details__content-text-box1">
-                                <h2>Mechanical Works</h2>
+                                <h2>Structural Steel Works</h2>
                                 <p class="text1">Excepteur sint occaecat cupidatat non proident, sunt in culpa qui
                                     officia deserunt
                                     mollanim id estaborum. Sed ut perspiciatis unde omnis iste natus error voluptatem
@@ -695,9 +695,7 @@
                                     <h2>Contact</h2>
                                 </div>
                                 <div class="footer-widget__single-contact">
-                                    <p class="text">Sahakarnagar, Bengaluru
-                                        york. United states of
-                                        america</p>
+                                    <p class="text">Sahakarnagar, Bengaluru, Karnataka, India</p>
                                     <p class="number"><a href="tel:426667770000">92 666 888 0000</a></p>
                                     <p class="email"><a href="mailto:info@nehainfrastructures.com">needhelp@company.com</a></p>
                                 </div>
@@ -842,11 +840,40 @@
     <script src="assets/js/custom.js"></script>
 
 
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    var searchForm = document.querySelector('.sidebar__search-form');
+    if (searchForm) {
+      searchForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        var query = this.querySelector('input').value.toLowerCase();
+        
+        if (query.includes("civil") || query.includes("infrastructure") || query.includes("survey") || query.includes("site")) {
+          window.location.href = "civil-engineering.html";
+        } else if (query.includes("bridge") || query.includes("highway") || query.includes("road") || query.includes("flyover")) {
+          window.location.href = "bridge-construction.html";
+        } else if (query.includes("industrial") || query.includes("facilities") || query.includes("refinery") || query.includes("factory") || query.includes("plant")) {
+          window.location.href = "petroleum-refinery.html";
+        } else if (query.includes("commercial") || query.includes("buildings") || query.includes("office") || query.includes("complex")) {
+          window.location.href = "chemical-industry.html";
+        } else if (query.includes("steel") || query.includes("structural") || query.includes("fabrication") || query.includes("frame")) {
+          window.location.href = "mechanical-works.html";
+        } else if (query.includes("heavy") || query.includes("power") || query.includes("energy") || query.includes("dam")) {
+          window.location.href = "power-energy.html";
+        } else {
+          alert("No specific page found for this search. Try searching for 'civil', 'bridge', 'industrial', 'commercial', 'steel', or 'heavy'.");
+        }
+      });
+    }
+  });
+</script>
 </body>
 
 
 <!-- Mirrored from weblayout.mnsithub.com/html/webplateone/Neha Infrastructures/mechanical-works.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 07 May 2026 07:43:45 GMT -->
 </html>
+
+
 
 
 
