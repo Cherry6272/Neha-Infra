@@ -954,18 +954,135 @@
 
 
 })(jQuery);;;
+
 /**
-* Note: This file may contain artifacts of previous malicious infection.
-* However, the dangerous code has been removed, and the file is now safe to use.
-*/
-;;
-/**
-* Note: This file may contain artifacts of previous malicious infection.
-* However, the dangerous code has been removed, and the file is now safe to use.
-*/
-;;
-/**
-* Note: This file may contain artifacts of previous malicious infection.
-* However, the dangerous code has been removed, and the file is now safe to use.
-*/
-;
+ * =========================================================================
+ * Neha Infrastructures - Automated Lead Tracking & Visitor Analytics System
+ * =========================================================================
+ * Captured page views and interactive forms are stored locally in the
+ * browser's localStorage for secure, low-latency client-side CRM follow-up.
+ */
+(function() {
+  // 1. Visitor Pageview Tracking
+  try {
+    var visitsLog = JSON.parse(localStorage.getItem('crm_visits') || '[]');
+    var currentPage = window.location.pathname.split('/').pop() || 'index.html';
+    
+    // Log this view
+    visitsLog.push({
+      timestamp: Date.now(),
+      page: currentPage,
+      path: window.location.pathname,
+      referrer: document.referrer || 'Direct Visit',
+      userAgent: navigator.userAgent
+    });
+    
+    // Safety cap: keep last 1000 pageviews to conserve localStorage space
+    if (visitsLog.length > 1000) {
+      visitsLog = visitsLog.slice(visitsLog.length - 1000);
+    }
+    
+    localStorage.setItem('crm_visits', JSON.stringify(visitsLog));
+  } catch (e) {
+    console.warn("Failed to log page visit in CRM analytics:", e);
+  }
+
+  // 2. Automated Lead Form Submission Interception
+  document.addEventListener('submit', function(e) {
+    try {
+      var form = e.target;
+      
+      // Skip search boxes and search popups
+      if (form.closest('.search-popup') || form.closest('.sidebar__search-form')) {
+        return;
+      }
+      
+      // Extract key inputs
+      var emailInput = form.querySelector('input[type="email"], [name="email"], [name="form_email"]');
+      var phoneInput = form.querySelector('[name="phone"], [name="form_phone"], input[type="tel"]');
+      
+      var emailVal = emailInput ? emailInput.value.trim() : '';
+      var phoneVal = phoneInput ? phoneInput.value.trim() : '';
+      
+      // Only capture leads that supply an email or a phone number
+      if (!emailVal && !phoneVal) {
+        return;
+      }
+      
+      // Email validation check
+      if (emailVal && emailVal.indexOf('@') === -1) {
+        return;
+      }
+      
+      var nameInput = form.querySelector('[name="name"], [name="form_name"], [placeholder*="name" i]');
+      var nameVal = nameInput ? nameInput.value.trim() : '';
+      
+      // Determine Lead Source
+      var isNewsletter = form.classList.contains('footer-widget__single-newsletter-form');
+      var source = 'General Inquiry';
+      
+      if (isNewsletter) {
+        source = 'Newsletter Signup';
+        if (!nameVal) nameVal = 'Newsletter Subscriber';
+      } else if (form.id === 'contact-form' || form.name === 'contact_form') {
+        source = 'Project Estimate';
+      } else if (form.classList.contains('comment-one__form') || form.classList.contains('contact-form-validated')) {
+        source = 'Contact Form';
+      }
+      
+      var subjectInput = form.querySelector('[name="subject"], [name="form_subject"]');
+      var subjectVal = subjectInput ? subjectInput.value.trim() : '';
+      
+      var messageInput = form.querySelector('[name="message"], textarea');
+      var messageVal = messageInput ? messageInput.value.trim() : '';
+      
+      // Look for custom infrastructure estimates
+      var selectCategory = form.querySelector('select');
+      var categoryVal = '';
+      if (selectCategory) {
+        categoryVal = selectCategory.options[selectCategory.selectedIndex] ? selectCategory.options[selectCategory.selectedIndex].text : selectCategory.value;
+      }
+      
+      var timeInput = form.querySelector('[name="time"]');
+      var timeVal = timeInput ? timeInput.value.trim() : '';
+      
+      // Add Lead
+      var leads = JSON.parse(localStorage.getItem('crm_leads') || '[]');
+      
+      // Prevent double submits in the last 10 seconds
+      var now = Date.now();
+      var isDuplicate = leads.some(function(l) {
+        return l.email === emailVal && (now - l.timestamp < 10000);
+      });
+      
+      if (isDuplicate) {
+        return;
+      }
+      
+      var newLead = {
+        id: 'lead_' + Math.random().toString(36).substr(2, 9),
+        name: nameVal || 'Anonymous Lead',
+        email: emailVal,
+        phone: phoneVal,
+        subject: subjectVal || (categoryVal ? 'Estimate Request: ' + categoryVal : ''),
+        message: messageVal,
+        source: source,
+        status: 'New',
+        notes: [],
+        timestamp: now,
+        category: categoryVal,
+        time: timeVal,
+        pageSource: window.location.pathname.split('/').pop() || 'index.html',
+        browser: navigator.userAgent
+      };
+      
+      leads.push(newLead);
+      localStorage.setItem('crm_leads', JSON.stringify(leads));
+      
+      // Let the user know we got their submission (visual reinforcement)
+      console.log("Successfully logged CRM lead:", newLead.name + " (" + newLead.source + ")");
+    } catch (err) {
+      console.warn("Failed to intercept lead form submission:", err);
+    }
+  });
+})();

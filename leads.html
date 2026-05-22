@@ -1,0 +1,2425 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Neha Infrastructures || Admin Leads CRM Portal</title>
+  
+  <!-- Favicons Icons -->
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/images/favicons/apple-touch-icon.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/images/favicons/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="assets/images/favicons/favicon-16x16.png" />
+  
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Saira+Semi+Condensed:wght@300;400;500;600;700;800&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="assets/vendors/fontawesome/css/all.min.css" />
+  
+  <!-- Custom Styling for Premium Aesthetics -->
+  <style>
+    :root {
+      /* Dark Theme (Default) */
+      --bg-primary: #0a0e17;
+      --bg-secondary: #121824;
+      --bg-tertiary: #1b2336;
+      --border-color: #26334d;
+      
+      --text-primary: #f3f4f6;
+      --text-secondary: #9ca3af;
+      --text-muted: #6b7280;
+      
+      --thm-base: #dd0429;      /* Brand Red */
+      --thm-base-glow: rgba(221, 4, 41, 0.15);
+      --thm-base-glow-strong: rgba(221, 4, 41, 0.4);
+      --accent-blue: #3b82f6;
+      --accent-green: #10b981;
+      --accent-amber: #f59e0b;
+      --accent-purple: #8b5cf6;
+      
+      --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.1);
+      --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.15), 0 2px 4px -1px rgba(0, 0, 0, 0.1);
+      --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.3), 0 4px 6px -2px rgba(0, 0, 0, 0.15);
+      --shadow-glow: 0 0 20px rgba(221, 4, 41, 0.15);
+      
+      --font-brand: 'Outfit', sans-serif;
+      --font-body: 'Saira Semi Condensed', sans-serif;
+      --radius-sm: 6px;
+      --radius-md: 12px;
+      --radius-lg: 20px;
+    }
+    
+    /* Light Theme Toggle Override */
+    [data-theme="light"] {
+      --bg-primary: #f8fafc;
+      --bg-secondary: #ffffff;
+      --bg-tertiary: #f1f5f9;
+      --border-color: #cbd5e1;
+      
+      --text-primary: #0f172a;
+      --text-secondary: #475569;
+      --text-muted: #64748b;
+      
+      --thm-base: #dd0429;
+      --thm-base-glow: rgba(221, 4, 41, 0.08);
+      --thm-base-glow-strong: rgba(221, 4, 41, 0.2);
+      
+      --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+      --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+      --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -2px rgba(0, 0, 0, 0.04);
+      --shadow-glow: 0 0 15px rgba(221, 4, 41, 0.08);
+    }
+    
+    * {
+      box-sizing: border-box;
+      transition: background-color 0.3s ease, border-color 0.3s ease;
+    }
+    
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: var(--bg-primary);
+      color: var(--text-primary);
+      font-family: var(--font-body);
+      font-size: 16px;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+    
+    h1, h2, h3, h4, h5, h6 {
+      font-family: var(--font-brand);
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      margin: 0 0 0.5rem 0;
+      color: var(--text-primary);
+    }
+    
+    a {
+      color: var(--thm-base);
+      text-decoration: none;
+    }
+    
+    /* Preloader Animation */
+    #preloader {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: var(--bg-primary);
+      z-index: 99999;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      transition: opacity 0.5s ease;
+    }
+    .spinner {
+      width: 50px;
+      height: 50px;
+      border: 4px solid var(--border-color);
+      border-top-color: var(--thm-base);
+      border-radius: 50%;
+      animation: spin 1s infinite linear;
+      box-shadow: var(--shadow-glow);
+    }
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    
+    /* Gate Panel (Passcode Lock) */
+    #passcode-gate {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: var(--bg-primary);
+      z-index: 9999;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+    
+    .gate-card {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 40px;
+      width: 100%;
+      max-width: 450px;
+      box-shadow: var(--shadow-lg), var(--shadow-glow);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .gate-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: linear-gradient(90deg, var(--thm-base), var(--accent-purple));
+    }
+    
+    .gate-icon {
+      font-size: 3rem;
+      color: var(--thm-base);
+      margin-bottom: 20px;
+      text-shadow: 0 0 15px var(--thm-base-glow-strong);
+      animation: pulse 2s infinite ease-in-out;
+    }
+    
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+    }
+    
+    .gate-input-group {
+      position: relative;
+      margin: 25px 0 15px 0;
+    }
+    
+    .gate-input {
+      width: 100%;
+      background: var(--bg-tertiary);
+      border: 1px solid var(--border-color);
+      color: var(--text-primary);
+      padding: 14px 20px;
+      padding-right: 50px;
+      border-radius: var(--radius-md);
+      font-size: 1.1rem;
+      letter-spacing: 0.2em;
+      text-align: center;
+      font-family: monospace;
+      outline: none;
+      transition: all 0.3s;
+    }
+    
+    .gate-input:focus {
+      border-color: var(--thm-base);
+      box-shadow: 0 0 10px var(--thm-base-glow);
+    }
+    
+    .gate-toggle-pwd {
+      position: absolute;
+      right: 15px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-secondary);
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 0;
+    }
+    
+    .gate-toggle-pwd:hover {
+      color: var(--text-primary);
+    }
+    
+    .gate-btn {
+      width: 100%;
+      background: var(--thm-base);
+      color: white;
+      border: none;
+      padding: 14px;
+      border-radius: var(--radius-md);
+      font-family: var(--font-brand);
+      font-weight: 600;
+      font-size: 1.05rem;
+      cursor: pointer;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+      transition: all 0.3s;
+      box-shadow: 0 4px 12px var(--thm-base-glow-strong);
+    }
+    
+    .gate-btn:hover {
+      background: #bf0320;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 18px var(--thm-base-glow-strong);
+    }
+    
+    .gate-btn:active {
+      transform: translateY(0);
+    }
+    
+    .error-msg {
+      color: var(--thm-base);
+      font-size: 0.9rem;
+      margin-top: 10px;
+      min-height: 20px;
+      font-weight: 500;
+    }
+    
+    /* Main Layout */
+    #dashboard-layout {
+      display: none;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+    
+    /* Premium Header */
+    .dashboard-header {
+      background: var(--bg-secondary);
+      border-bottom: 1px solid var(--border-color);
+      padding: 15px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: var(--shadow-sm);
+    }
+    
+    .brand-group {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+    
+    .brand-logo-circle {
+      width: 42px;
+      height: 42px;
+      background: linear-gradient(135deg, var(--thm-base), #99021a);
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      font-family: var(--font-brand);
+      font-weight: 800;
+      font-size: 1.4rem;
+      box-shadow: var(--shadow-glow);
+    }
+    
+    .brand-text h2 {
+      font-size: 1.25rem;
+      margin: 0;
+      line-height: 1;
+    }
+    
+    .brand-text p {
+      font-size: 0.8rem;
+      color: var(--text-secondary);
+      margin: 3px 0 0 0;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+    
+    .header-controls {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+    
+    .theme-toggle-btn, .logout-btn, .action-outline-btn {
+      background: var(--bg-tertiary);
+      border: 1px solid var(--border-color);
+      color: var(--text-primary);
+      padding: 10px 14px;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--font-brand);
+      font-weight: 500;
+      transition: all 0.2s;
+    }
+    
+    .theme-toggle-btn:hover, .logout-btn:hover, .action-outline-btn:hover {
+      border-color: var(--text-muted);
+      background: var(--bg-secondary);
+    }
+    
+    .logout-btn:hover {
+      border-color: var(--thm-base);
+      color: var(--thm-base);
+    }
+    
+    /* Main Content Container */
+    .dashboard-container {
+      flex: 1;
+      padding: 30px;
+      max-width: 1600px;
+      width: 100%;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 30px;
+    }
+    
+    /* Metrics Grid */
+    .metrics-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+    }
+    
+    .metric-card {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 24px;
+      position: relative;
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    
+    .metric-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-md);
+    }
+    
+    .metric-card::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      height: 100%;
+      width: 4px;
+      background-color: var(--text-muted);
+    }
+    
+    .metric-card.m-total::before { background-color: var(--accent-blue); }
+    .metric-card.m-new::before { background-color: var(--accent-purple); }
+    .metric-card.m-active::before { background-color: var(--accent-amber); }
+    .metric-card.m-won::before { background-color: var(--accent-green); }
+    .metric-card.m-lost::before { background-color: var(--thm-base); }
+    .metric-card.m-views::before { background-color: #06b6d4; }
+    
+    .metric-title {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+    
+    .metric-icon {
+      font-size: 1.1rem;
+      opacity: 0.7;
+    }
+    
+    .metric-value {
+      font-size: 2.2rem;
+      font-weight: 700;
+      font-family: var(--font-brand);
+      line-height: 1.1;
+      margin-bottom: 5px;
+      display: flex;
+      align-items: baseline;
+      gap: 10px;
+    }
+    
+    .metric-subtext {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      margin: 0;
+    }
+    
+    .conversion-rate-badge {
+      font-size: 0.75rem;
+      padding: 2px 6px;
+      border-radius: 4px;
+      background: var(--thm-base-glow);
+      color: var(--thm-base);
+      font-weight: 600;
+    }
+    
+    /* Analytics & Tools Row */
+    .dashboard-two-col {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 30px;
+    }
+    
+    @media (max-width: 1100px) {
+      .dashboard-two-col {
+        grid-template-columns: 1fr;
+      }
+    }
+    
+    .panel-card {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 24px;
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .panel-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+      padding-bottom: 15px;
+      border-bottom: 1px solid var(--border-color);
+    }
+    
+    .panel-title {
+      font-size: 1.15rem;
+      margin: 0;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    
+    /* SVG Interactive Charts styling */
+    .chart-container {
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+      min-height: 220px;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+    
+    .pie-chart-svg {
+      width: 160px;
+      height: 160px;
+      transform: rotate(-90deg);
+    }
+    
+    .bar-chart-container {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      height: 180px;
+      padding: 10px 20px 20px 20px;
+      border-bottom: 2px solid var(--border-color);
+      width: 100%;
+    }
+    
+    .bar-col {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 15%;
+      height: 100%;
+      justify-content: flex-end;
+      position: relative;
+    }
+    
+    .bar-filled {
+      width: 70%;
+      border-radius: 4px 4px 0 0;
+      background: var(--thm-base);
+      min-height: 4px;
+      transition: height 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+    }
+    
+    .bar-value-tooltip {
+      position: absolute;
+      top: -28px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--bg-tertiary);
+      border: 1px solid var(--border-color);
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      white-space: nowrap;
+      opacity: 0;
+      transition: opacity 0.2s;
+    }
+    
+    .bar-col:hover .bar-value-tooltip {
+      opacity: 1;
+    }
+    
+    .bar-label {
+      font-size: 0.75rem;
+      color: var(--text-secondary);
+      margin-top: 8px;
+      text-align: center;
+      position: absolute;
+      bottom: -22px;
+      white-space: nowrap;
+    }
+    
+    .legend-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      width: 100%;
+      max-width: 250px;
+    }
+    
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+    }
+    
+    .legend-color {
+      width: 12px;
+      height: 12px;
+      border-radius: 3px;
+    }
+    
+    /* Workspace (Filters and Table) */
+    .workspace-filters {
+      display: flex;
+      gap: 15px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+    
+    .search-input-wrapper {
+      position: relative;
+      flex: 1;
+      min-width: 260px;
+    }
+    
+    .search-icon {
+      position: absolute;
+      left: 15px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-muted);
+    }
+    
+    .filter-search-input {
+      width: 100%;
+      background: var(--bg-tertiary);
+      border: 1px solid var(--border-color);
+      color: var(--text-primary);
+      padding: 12px 15px 12px 42px;
+      border-radius: var(--radius-sm);
+      outline: none;
+      font-size: 0.95rem;
+    }
+    
+    .filter-search-input:focus {
+      border-color: var(--thm-base);
+    }
+    
+    .filter-select {
+      background: var(--bg-tertiary);
+      border: 1px solid var(--border-color);
+      color: var(--text-primary);
+      padding: 12px 15px;
+      border-radius: var(--radius-sm);
+      outline: none;
+      min-width: 150px;
+      font-size: 0.95rem;
+      cursor: pointer;
+    }
+    
+    .filter-select:focus {
+      border-color: var(--thm-base);
+    }
+    
+    .action-btn-group {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    
+    .btn-solid-primary {
+      background: var(--thm-base);
+      color: white;
+      border: none;
+      padding: 12px 20px;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      font-family: var(--font-brand);
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.2s;
+    }
+    
+    .btn-solid-primary:hover {
+      background: #c2031f;
+    }
+    
+    /* Table Container */
+    .leads-table-container {
+      overflow-x: auto;
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-sm);
+    }
+    
+    .leads-table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 0.95rem;
+    }
+    
+    .leads-table th {
+      background: var(--bg-tertiary);
+      border-bottom: 2px solid var(--border-color);
+      color: var(--text-primary);
+      font-family: var(--font-brand);
+      font-weight: 600;
+      padding: 16px 20px;
+      text-transform: uppercase;
+      font-size: 0.8rem;
+      letter-spacing: 0.05em;
+    }
+    
+    .leads-table td {
+      padding: 16px 20px;
+      border-bottom: 1px solid var(--border-color);
+      color: var(--text-primary);
+      vertical-align: middle;
+    }
+    
+    .leads-table tbody tr {
+      cursor: pointer;
+      transition: background-color 0.2s;
+    }
+    
+    .leads-table tbody tr:hover {
+      background-color: var(--thm-base-glow);
+    }
+    
+    .leads-table tbody tr.active-row {
+      background-color: rgba(221, 4, 41, 0.08);
+      border-left: 3px solid var(--thm-base);
+    }
+    
+    /* Status Badges */
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 10px;
+      border-radius: 50px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.02em;
+    }
+    
+    .status-badge::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: currentColor;
+    }
+    
+    .status-new { background-color: rgba(139, 92, 246, 0.15); color: var(--accent-purple); }
+    .status-contacted { background-color: rgba(59, 130, 246, 0.15); color: var(--accent-blue); }
+    .status-inprogress { background-color: rgba(245, 158, 11, 0.15); color: var(--accent-amber); }
+    .status-won { background-color: rgba(16, 185, 129, 0.15); color: var(--accent-green); }
+    .status-lost { background-color: rgba(221, 4, 41, 0.15); color: var(--thm-base); }
+    
+    /* Empty State */
+    .empty-state {
+      padding: 50px 20px;
+      text-align: center;
+      color: var(--text-secondary);
+    }
+    
+    .empty-state-icon {
+      font-size: 3.5rem;
+      color: var(--text-muted);
+      margin-bottom: 20px;
+    }
+    
+    /* Side-Drawer Details Panel */
+    .drawer-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(4px);
+      z-index: 1000;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+    
+    .drawer-overlay.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+    
+    .detail-drawer {
+      position: fixed;
+      top: 0;
+      right: -550px;
+      width: 100%;
+      max-width: 520px;
+      height: 100%;
+      background: var(--bg-secondary);
+      border-left: 1px solid var(--border-color);
+      box-shadow: -10px 0 30px rgba(0, 0, 0, 0.3);
+      z-index: 1001;
+      transition: right 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .detail-drawer.open {
+      right: 0;
+    }
+    
+    .drawer-header {
+      padding: 24px;
+      border-bottom: 1px solid var(--border-color);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: var(--bg-tertiary);
+    }
+    
+    .drawer-close-btn {
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      color: var(--text-secondary);
+      cursor: pointer;
+      width: 32px;
+      height: 32px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 50%;
+      transition: background-color 0.2s;
+    }
+    
+    .drawer-close-btn:hover {
+      background: var(--border-color);
+      color: var(--text-primary);
+    }
+    
+    .drawer-content {
+      flex: 1;
+      padding: 24px;
+      overflow-y: auto;
+    }
+    
+    .section-divider {
+      margin: 20px 0;
+      border-bottom: 1px solid var(--border-color);
+    }
+    
+    .detail-group {
+      margin-bottom: 18px;
+    }
+    
+    .detail-label {
+      font-size: 0.75rem;
+      color: var(--text-secondary);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 5px;
+    }
+    
+    .detail-value {
+      font-size: 1.05rem;
+      color: var(--text-primary);
+      font-weight: 500;
+    }
+    
+    .detail-value.msg-text {
+      background: var(--bg-tertiary);
+      border: 1px solid var(--border-color);
+      padding: 15px;
+      border-radius: var(--radius-sm);
+      white-space: pre-wrap;
+      font-size: 0.95rem;
+      line-height: 1.5;
+    }
+    
+    /* Notes & History inside Drawer */
+    .notes-timeline {
+      position: relative;
+      margin: 20px 0;
+      padding-left: 20px;
+    }
+    
+    .notes-timeline::before {
+      content: '';
+      position: absolute;
+      left: 4px;
+      top: 5px;
+      bottom: 5px;
+      width: 2px;
+      background: var(--border-color);
+    }
+    
+    .note-item {
+      position: relative;
+      margin-bottom: 20px;
+    }
+    
+    .note-dot {
+      position: absolute;
+      left: -20px;
+      top: 5px;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--thm-base);
+      border: 2px solid var(--bg-secondary);
+      box-shadow: 0 0 5px var(--thm-base-glow-strong);
+    }
+    
+    .note-content {
+      background: var(--bg-tertiary);
+      border: 1px solid var(--border-color);
+      padding: 12px;
+      border-radius: var(--radius-sm);
+    }
+    
+    .note-header {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.75rem;
+      color: var(--text-secondary);
+      margin-bottom: 5px;
+    }
+    
+    .note-text {
+      font-size: 0.9rem;
+      color: var(--text-primary);
+      margin: 0;
+    }
+    
+    .add-note-form {
+      display: flex;
+      gap: 10px;
+      margin-top: 15px;
+    }
+    
+    .note-textarea {
+      flex: 1;
+      background: var(--bg-tertiary);
+      border: 1px solid var(--border-color);
+      color: var(--text-primary);
+      padding: 10px;
+      border-radius: var(--radius-sm);
+      resize: vertical;
+      font-family: inherit;
+      font-size: 0.9rem;
+      min-height: 50px;
+      outline: none;
+    }
+    
+    .note-textarea:focus {
+      border-color: var(--thm-base);
+    }
+    
+    /* Interactive status changer buttons */
+    .status-picker {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 10px;
+    }
+    
+    .status-picker-btn {
+      border: 1px solid var(--border-color);
+      background: var(--bg-tertiary);
+      color: var(--text-secondary);
+      padding: 6px 12px;
+      border-radius: 50px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    
+    .status-picker-btn.active-p-new { background: rgba(139, 92, 246, 0.15); border-color: var(--accent-purple); color: var(--accent-purple); }
+    .status-picker-btn.active-p-contacted { background: rgba(59, 130, 246, 0.15); border-color: var(--accent-blue); color: var(--accent-blue); }
+    .status-picker-btn.active-p-inprogress { background: rgba(245, 158, 11, 0.15); border-color: var(--accent-amber); color: var(--accent-amber); }
+    .status-picker-btn.active-p-won { background: rgba(16, 185, 129, 0.15); border-color: var(--accent-green); color: var(--accent-green); }
+    .status-picker-btn.active-p-lost { background: rgba(221, 4, 41, 0.15); border-color: var(--thm-base); color: var(--thm-base); }
+    
+    .status-picker-btn:hover:not(.active-p-new):not(.active-p-contacted):not(.active-p-inprogress):not(.active-p-won):not(.active-p-lost) {
+      border-color: var(--text-muted);
+      color: var(--text-primary);
+    }
+    
+    /* Modals for Add Manual Lead & Database Tools */
+    .modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 2000;
+      background: rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(5px);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+    
+    .modal.active {
+      display: flex;
+    }
+    
+    .modal-content {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 30px;
+      width: 100%;
+      max-width: 600px;
+      box-shadow: var(--shadow-lg);
+      max-height: 90vh;
+      overflow-y: auto;
+    }
+    
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--border-color);
+    }
+    
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 15px;
+    }
+    
+    @media (max-width: 600px) {
+      .form-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+    
+    .form-group {
+      margin-bottom: 15px;
+    }
+    
+    .form-group.full-width {
+      grid-column: span 2;
+    }
+    
+    @media (max-width: 600px) {
+      .form-group.full-width {
+        grid-column: span 1;
+      }
+    }
+    
+    .form-group label {
+      display: block;
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      margin-bottom: 6px;
+      font-weight: 500;
+    }
+    
+    .form-control-input {
+      width: 100%;
+      background: var(--bg-tertiary);
+      border: 1px solid var(--border-color);
+      color: var(--text-primary);
+      padding: 10px 14px;
+      border-radius: var(--radius-sm);
+      outline: none;
+      font-family: inherit;
+    }
+    
+    .form-control-input:focus {
+      border-color: var(--thm-base);
+    }
+    
+    .modal-footer {
+      display: flex;
+      justify-content: flex-end;
+      gap: 10px;
+      margin-top: 20px;
+      padding-top: 15px;
+      border-top: 1px solid var(--border-color);
+    }
+    
+    .btn-secondary {
+      background: var(--bg-tertiary);
+      border: 1px solid var(--border-color);
+      color: var(--text-primary);
+      padding: 10px 20px;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      font-family: inherit;
+      font-weight: 600;
+    }
+    
+    .btn-secondary:hover {
+      background: var(--border-color);
+    }
+    
+    /* Tools Layout */
+    .tools-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 15px;
+      margin-top: 15px;
+    }
+    
+    .tool-btn {
+      background: var(--bg-tertiary);
+      border: 1px solid var(--border-color);
+      color: var(--text-primary);
+      padding: 15px;
+      border-radius: var(--radius-md);
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      text-align: center;
+      transition: all 0.2s;
+    }
+    
+    .tool-btn:hover {
+      border-color: var(--thm-base);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 10px var(--thm-base-glow);
+    }
+    
+    .tool-btn i {
+      font-size: 1.5rem;
+      color: var(--thm-base);
+    }
+    
+    .tool-btn-title {
+      font-family: var(--font-brand);
+      font-weight: 600;
+      font-size: 0.95rem;
+    }
+    
+    .tool-btn-desc {
+      font-size: 0.75rem;
+      color: var(--text-secondary);
+    }
+    
+    /* Responsive styling tweaks */
+    @media (max-width: 768px) {
+      .dashboard-header {
+        padding: 15px;
+      }
+      .brand-text h2 {
+        font-size: 1.1rem;
+      }
+      .dashboard-container {
+        padding: 15px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Preloader Screen -->
+  <div id="preloader">
+    <div class="spinner"></div>
+  </div>
+
+  <!-- Passcode Protection Gate -->
+  <div id="passcode-gate">
+    <div class="gate-card">
+      <div class="gate-icon">
+        <i class="fas fa-lock"></i>
+      </div>
+      <h2>Secure Access</h2>
+      <p style="color: var(--text-secondary);">Neha Infrastructures Admin CRM</p>
+      
+      <div class="gate-input-group">
+        <input type="password" id="gate-passcode" class="gate-input" placeholder="••••••••" autofocus autocomplete="current-password">
+        <button type="button" class="gate-toggle-pwd" onclick="togglePasscodeVisibility()">
+          <i class="far fa-eye" id="eye-icon"></i>
+        </button>
+      </div>
+      
+      <button class="gate-btn" onclick="validatePasscode()">
+        <span>Unlock CRM Portal</span>
+        <i class="fas fa-arrow-right"></i>
+      </button>
+      
+      <div id="gate-error" class="error-msg"></div>
+      
+      <p style="font-size: 0.75rem; color: var(--text-muted); margin-top: 25px;">
+        This portal contains confidential customer lead inquiries.<br>
+        Default passcode: <code style="color: var(--thm-base); font-weight: bold;">admin123</code>
+      </p>
+    </div>
+  </div>
+
+  <!-- Main Dashboard Layout -->
+  <div id="dashboard-layout">
+    
+    <!-- Top Nav Bar -->
+    <header class="dashboard-header">
+      <div class="brand-group">
+        <div class="brand-logo-circle">N</div>
+        <div class="brand-text">
+          <h2>Neha Infrastructures</h2>
+          <p>Leads & Visitor CRM Portal</p>
+        </div>
+      </div>
+      <div class="header-controls">
+        <button class="theme-toggle-btn" onclick="toggleTheme()" aria-label="Toggle Theme">
+          <i class="fas fa-moon" id="theme-icon"></i>
+          <span id="theme-text">Dark Mode</span>
+        </button>
+        <button class="action-outline-btn" onclick="openToolsModal()">
+          <i class="fas fa-cog"></i>
+          <span>CRM Tools</span>
+        </button>
+        <button class="logout-btn" onclick="logout()" title="Lock Portal">
+          <i class="fas fa-sign-out-alt"></i>
+          <span>Lock</span>
+        </button>
+      </div>
+    </header>
+    
+    <!-- Workspace -->
+    <main class="dashboard-container">
+      
+      <!-- Metrics Bar -->
+      <section class="metrics-grid">
+        <div class="metric-card m-total">
+          <div class="metric-title">
+            <span>Total Leads</span>
+            <i class="fas fa-users metric-icon"></i>
+          </div>
+          <div class="metric-value" id="val-total-leads">0</div>
+          <p class="metric-subtext">All channels combined</p>
+        </div>
+        
+        <div class="metric-card m-new">
+          <div class="metric-title">
+            <span>New Leads</span>
+            <i class="fas fa-user-plus metric-icon"></i>
+          </div>
+          <div class="metric-value" style="color: var(--accent-purple);" id="val-new-leads">0</div>
+          <p class="metric-subtext">Pending first contact</p>
+        </div>
+        
+        <div class="metric-card m-active">
+          <div class="metric-title">
+            <span>In Progress</span>
+            <i class="fas fa-phone-alt metric-icon"></i>
+          </div>
+          <div class="metric-value" style="color: var(--accent-amber);" id="val-active-leads">0</div>
+          <p class="metric-subtext">Contacted & active deals</p>
+        </div>
+        
+        <div class="metric-card m-won">
+          <div class="metric-title">
+            <span>Closed-Won</span>
+            <i class="fas fa-handshake metric-icon"></i>
+          </div>
+          <div class="metric-value" style="color: var(--accent-green);" id="val-won-leads">0</div>
+          <p class="metric-subtext">Converted projects</p>
+        </div>
+        
+        <div class="metric-card m-views">
+          <div class="metric-title">
+            <span>Site Visits</span>
+            <i class="fas fa-eye metric-icon"></i>
+          </div>
+          <div class="metric-value" style="color: #06b6d4;" id="val-site-visits">0</div>
+          <p class="metric-subtext">Logged pageviews</p>
+        </div>
+        
+        <div class="metric-card m-lost">
+          <div class="metric-title">
+            <span>Conversion Rate</span>
+            <i class="fas fa-chart-line metric-icon"></i>
+          </div>
+          <div class="metric-value" style="color: var(--thm-base);">
+            <span id="val-conversion-rate">0.0%</span>
+          </div>
+          <p class="metric-subtext">Leads / Site Visits</p>
+        </div>
+      </section>
+      
+      <!-- Analytics Row -->
+      <section class="dashboard-two-col">
+        
+        <!-- Leads by Status Bar Chart -->
+        <div class="panel-card">
+          <div class="panel-header">
+            <h3 class="panel-title"><i class="fas fa-chart-bar" style="color: var(--thm-base);"></i> Leads Follow-Up Funnel</h3>
+            <span style="font-size: 0.8rem; color: var(--text-secondary);">Funnels by Lead Status</span>
+          </div>
+          <div class="bar-chart-container" id="funnel-chart">
+            <!-- Dynamic Chart Bars -->
+            <div class="bar-col">
+              <div class="bar-value-tooltip" id="bar-val-new">0</div>
+              <div class="bar-filled" style="height: 0%; background: var(--accent-purple);" id="bar-new"></div>
+              <span class="bar-label">New</span>
+            </div>
+            <div class="bar-col">
+              <div class="bar-value-tooltip" id="bar-val-contacted">0</div>
+              <div class="bar-filled" style="height: 0%; background: var(--accent-blue);" id="bar-contacted"></div>
+              <span class="bar-label">Contacted</span>
+            </div>
+            <div class="bar-col">
+              <div class="bar-value-tooltip" id="bar-val-inprogress">0</div>
+              <div class="bar-filled" style="height: 0%; background: var(--accent-amber);" id="bar-inprogress"></div>
+              <span class="bar-label">In Progress</span>
+            </div>
+            <div class="bar-col">
+              <div class="bar-value-tooltip" id="bar-val-won">0</div>
+              <div class="bar-filled" style="height: 0%; background: var(--accent-green);" id="bar-won"></div>
+              <span class="bar-label">Won</span>
+            </div>
+            <div class="bar-col">
+              <div class="bar-value-tooltip" id="bar-val-lost">0</div>
+              <div class="bar-filled" style="height: 0%; background: var(--thm-base);" id="bar-lost"></div>
+              <span class="bar-label">Lost</span>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Leads by Source Donut Chart -->
+        <div class="panel-card">
+          <div class="panel-header">
+            <h3 class="panel-title"><i class="fas fa-pie-chart" style="color: var(--accent-purple);"></i> Lead Sources</h3>
+          </div>
+          <div class="chart-container">
+            <svg class="pie-chart-svg" id="donut-chart-svg" viewBox="0 0 42 42">
+              <circle cx="21" cy="21" r="15.91549430918954" fill="transparent" stroke="var(--border-color)" stroke-width="4"></circle>
+              <!-- Dynamic Doughnut Segments injected via JS -->
+              <circle id="donut-segment" cx="21" cy="21" r="15.91549430918954" fill="transparent" stroke="var(--thm-base)" stroke-width="4.2" stroke-dasharray="0 100" stroke-dashoffset="0"></circle>
+            </svg>
+            <div class="legend-grid" id="donut-legend">
+              <!-- Dynamic Legend Items -->
+            </div>
+          </div>
+        </div>
+        
+      </section>
+      
+      <!-- Lead Database Grid -->
+      <section class="panel-card">
+        <div class="panel-header">
+          <h3 class="panel-title">
+            <i class="fas fa-list-alt" style="color: var(--accent-blue);"></i> Active Client Leads
+          </h3>
+          <div class="action-btn-group">
+            <button class="btn-solid-primary" onclick="openAddManualLeadModal()">
+              <i class="fas fa-plus"></i> Add Manual Lead
+            </button>
+          </div>
+        </div>
+        
+        <!-- Search & Filter Bar -->
+        <div class="workspace-filters">
+          <div class="search-input-wrapper">
+            <i class="fas fa-search search-icon"></i>
+            <input type="text" id="search-filter" class="filter-search-input" placeholder="Search by name, email, phone or project subject..." oninput="renderDashboard()">
+          </div>
+          
+          <select id="status-filter" class="filter-select" onchange="renderDashboard()">
+            <option value="ALL">All Statuses</option>
+            <option value="New">New</option>
+            <option value="Contacted">Contacted</option>
+            <option value="In Progress">In Progress</option>
+            <option value="Won">Won (Closed)</option>
+            <option value="Lost">Lost (Closed)</option>
+          </select>
+          
+          <select id="source-filter" class="filter-select" onchange="renderDashboard()">
+            <option value="ALL">All Sources</option>
+            <option value="Contact Form">Contact Form</option>
+            <option value="Project Estimate">Project Estimate</option>
+            <option value="Newsletter Signup">Newsletter</option>
+            <option value="Manual Entry">Manual / Offline</option>
+          </select>
+        </div>
+        
+        <!-- Table -->
+        <div class="leads-table-container">
+          <table class="leads-table" id="leads-table-element">
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>Client Name</th>
+                <th>Contact Details</th>
+                <th>Source</th>
+                <th>Status</th>
+                <th style="text-align: right;">Action</th>
+              </tr>
+            </thead>
+            <tbody id="leads-table-body">
+              <!-- Dynamic row insertion -->
+            </tbody>
+          </table>
+          <div id="table-empty-state" class="empty-state" style="display: none;">
+            <i class="far fa-folder-open empty-state-icon"></i>
+            <h4>No matching leads found</h4>
+            <p>Try adjusting your search filters or add a manual offline lead.</p>
+          </div>
+        </div>
+      </section>
+      
+    </main>
+  </div>
+
+  <!-- Side-Drawer Details Panel Overlay -->
+  <div class="drawer-overlay" id="drawer-overlay" onclick="closeLeadDrawer()"></div>
+
+  <!-- Side-Drawer Details Panel -->
+  <div class="detail-drawer" id="detail-drawer">
+    <div class="drawer-header">
+      <div>
+        <h3 style="margin: 0;" id="drawer-client-name">Lead Details</h3>
+        <span style="font-size: 0.8rem; color: var(--text-secondary);" id="drawer-lead-id">#ID</span>
+      </div>
+      <button class="drawer-close-btn" onclick="closeLeadDrawer()">&times;</button>
+    </div>
+    
+    <div class="drawer-content" id="drawer-body">
+      <!-- Status Changer Section -->
+      <div class="detail-group">
+        <span class="detail-label">Lead Status</span>
+        <div class="status-picker" id="drawer-status-picker">
+          <button class="status-picker-btn" id="s-p-new" onclick="updateLeadStatus('New')">New</button>
+          <button class="status-picker-btn" id="s-p-contacted" onclick="updateLeadStatus('Contacted')">Contacted</button>
+          <button class="status-picker-btn" id="s-p-inprogress" onclick="updateLeadStatus('In Progress')">In Progress</button>
+          <button class="status-picker-btn" id="s-p-won" onclick="updateLeadStatus('Won')">Won</button>
+          <button class="status-picker-btn" id="s-p-lost" onclick="updateLeadStatus('Lost')">Lost</button>
+        </div>
+      </div>
+      
+      <div class="section-divider"></div>
+      
+      <!-- Contact Info -->
+      <div class="form-grid">
+        <div class="detail-group">
+          <span class="detail-label">Email Address</span>
+          <div class="detail-value" id="drawer-client-email">-</div>
+        </div>
+        <div class="detail-group">
+          <span class="detail-label">Phone Number</span>
+          <div class="detail-value" id="drawer-client-phone">-</div>
+        </div>
+      </div>
+      
+      <!-- Metadata parameters -->
+      <div class="form-grid">
+        <div class="detail-group">
+          <span class="detail-label">Lead Channel / Source</span>
+          <div class="detail-value" id="drawer-lead-source">-</div>
+        </div>
+        <div class="detail-group">
+          <span class="detail-label">Date Submitted</span>
+          <div class="detail-value" id="drawer-lead-date">-</div>
+        </div>
+      </div>
+      
+      <div class="form-grid" id="estimate-meta-row" style="display: none;">
+        <div class="detail-group">
+          <span class="detail-label">Project Category</span>
+          <div class="detail-value" id="drawer-lead-category">-</div>
+        </div>
+        <div class="detail-group">
+          <span class="detail-label">Requested Time</span>
+          <div class="detail-value" id="drawer-lead-time">-</div>
+        </div>
+      </div>
+      
+      <!-- Inquiry Message -->
+      <div class="detail-group">
+        <span class="detail-label">Inquiry Message / Subject</span>
+        <div class="detail-value font-brand" id="drawer-lead-subject" style="font-weight: 600; margin-bottom: 6px;">Subject</div>
+        <div class="detail-value msg-text" id="drawer-lead-message">-</div>
+      </div>
+      
+      <!-- Tracking Browser Details -->
+      <div class="detail-group" style="opacity: 0.85;">
+        <span class="detail-label"><i class="fas fa-info-circle"></i> Browser analytics & tracking parameters</span>
+        <div class="note-content" style="font-size: 0.8rem; line-height: 1.4; font-family: monospace;">
+          Page Source: <span id="drawer-page-source">-</span><br>
+          Browser: <span id="drawer-user-agent">-</span>
+        </div>
+      </div>
+      
+      <div class="section-divider"></div>
+      
+      <!-- Follow Up Notes Chronological History -->
+      <div class="detail-group">
+        <h4 style="font-size: 1.05rem;"><i class="far fa-edit"></i> Administrative Follow-Up Notes</h4>
+        <div class="notes-timeline" id="drawer-notes-timeline">
+          <!-- Dynamically populated comments -->
+        </div>
+        
+        <!-- Add Comment Form -->
+        <div class="add-note-form">
+          <textarea id="new-note-text" class="note-textarea" placeholder="Add follow-up notes (e.g. 'Left voicemail', 'Emailed quote details...')" rows="2"></textarea>
+          <button class="btn-solid-primary" style="height: fit-content; align-self: flex-end; padding: 10px 15px;" onclick="addLeadNote()">
+            <i class="fas fa-paper-plane"></i>
+          </button>
+        </div>
+      </div>
+      
+      <div style="margin-top: 30px; display: flex; gap: 10px;">
+        <a href="" id="drawer-email-btn" class="action-outline-btn" style="flex: 1; justify-content: center; text-decoration: none;">
+          <i class="far fa-envelope"></i> Email Client
+        </a>
+        <a href="" id="drawer-phone-btn" class="action-outline-btn" style="flex: 1; justify-content: center; text-decoration: none;">
+          <i class="fas fa-phone"></i> Call Client
+        </a>
+        <button class="action-outline-btn" style="border-color: rgba(221, 4, 41, 0.3); color: var(--thm-base); flex: 0.4; justify-content: center;" onclick="deleteCurrentLead()">
+          <i class="far fa-trash-alt"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Add Manual Lead Modal -->
+  <div class="modal" id="add-lead-modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 style="margin: 0;"><i class="fas fa-user-plus" style="color: var(--thm-base);"></i> Create Offline / Manual Lead</h3>
+        <button class="drawer-close-btn" onclick="closeAddManualLeadModal()">&times;</button>
+      </div>
+      
+      <form id="manual-lead-form" onsubmit="saveManualLead(event)">
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="m-name">Client Name *</label>
+            <input type="text" id="m-name" class="form-control-input" placeholder="e.g. Robert Jackson" required>
+          </div>
+          <div class="form-group">
+            <label for="m-email">Email Address</label>
+            <input type="email" id="m-email" class="form-control-input" placeholder="e.g. robert@company.com">
+          </div>
+        </div>
+        
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="m-phone">Phone Number</label>
+            <input type="text" id="m-phone" class="form-control-input" placeholder="e.g. +91 98765-43210">
+          </div>
+          <div class="form-group">
+            <label for="m-source">Lead Channel / Source</label>
+            <select id="m-source" class="form-control-input" style="height: 42px;">
+              <option value="Manual Entry">Phone Call / Walk-In</option>
+              <option value="Contact Form">Contact Form Submission</option>
+              <option value="Project Estimate">Project Estimate Submission</option>
+              <option value="Newsletter Signup">Newsletter Subscription</option>
+            </select>
+          </div>
+        </div>
+        
+        <div class="form-group">
+          <label for="m-subject">Subject / Project Category</label>
+          <input type="text" id="m-subject" class="form-control-input" placeholder="e.g. Structural Steel Works Quote">
+        </div>
+        
+        <div class="form-group">
+          <label for="m-message">Detailed Requirements / Inquiry Notes</label>
+          <textarea id="m-message" class="form-control-input" placeholder="Write any specific constraints or project instructions captured during call..." rows="4"></textarea>
+        </div>
+        
+        <div class="modal-footer">
+          <button type="button" class="btn-secondary" onclick="closeAddManualLeadModal()">Cancel</button>
+          <button type="submit" class="btn-solid-primary">Create Lead</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Settings / CRM Tools Modal -->
+  <div class="modal" id="tools-modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 style="margin: 0;"><i class="fas fa-sliders-h" style="color: var(--thm-base);"></i> Database & CRM Utilities</h3>
+        <button class="drawer-close-btn" onclick="closeToolsModal()">&times;</button>
+      </div>
+      
+      <p style="color: var(--text-secondary); margin-bottom: 20px;">
+        Manage lead imports, data formatting backups, and reset states safely.
+      </p>
+      
+      <div class="tools-grid">
+        <button class="tool-btn" onclick="populateMockData()">
+          <i class="fas fa-database"></i>
+          <span class="tool-btn-title">Load Mock Data</span>
+          <span class="tool-btn-desc">Inject 6 high-fidelity leads & 120+ visits for instant demo display.</span>
+        </button>
+        
+        <button class="tool-btn" onclick="exportDataJSON()">
+          <i class="fas fa-file-download"></i>
+          <span class="tool-btn-title">Export JSON Backup</span>
+          <span class="tool-btn-desc">Download complete CRM database locally.</span>
+        </button>
+        
+        <button class="tool-btn" onclick="exportDataCSV()">
+          <i class="fas fa-file-csv"></i>
+          <span class="tool-btn-title">Export CSV Report</span>
+          <span class="tool-btn-desc">Download leads list directly as a spreadsheet.</span>
+        </button>
+        
+        <button class="tool-btn" style="position: relative;" onclick="document.getElementById('json-import-file').click();">
+          <i class="fas fa-file-upload"></i>
+          <span class="tool-btn-title">Import JSON Backup</span>
+          <span class="tool-btn-desc">Upload and restore leads from backup files.</span>
+          <input type="file" id="json-import-file" style="display: none;" onchange="importDataJSON(event)" accept=".json">
+        </button>
+        
+        <button class="tool-btn" style="border-color: rgba(221, 4, 41, 0.4);" onclick="clearDatabase()">
+          <i class="fas fa-trash-alt" style="color: var(--thm-base);"></i>
+          <span class="tool-btn-title" style="color: var(--thm-base);">Wipe Database</span>
+          <span class="tool-btn-desc">Clear all lead data and visitor stats completely.</span>
+        </button>
+      </div>
+      
+      <div class="modal-footer">
+        <button type="button" class="btn-secondary" onclick="closeToolsModal()">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Dashboard Controller Script -->
+  <script>
+    // Config State
+    var defaultPasscode = "admin123";
+    var activeLeadId = null;
+    
+    // Page load preloader handler
+    window.addEventListener('load', function() {
+      setTimeout(function() {
+        var preloader = document.getElementById('preloader');
+        preloader.style.opacity = '0';
+        setTimeout(function() {
+          preloader.style.display = 'none';
+        }, 500);
+      }, 300);
+      
+      // Auto-unlock check
+      if (sessionStorage.getItem('crm_authenticated') === 'true') {
+        document.getElementById('passcode-gate').style.display = 'none';
+        document.getElementById('dashboard-layout').style.display = 'flex';
+        renderDashboard();
+      }
+      
+      // Inherit user theme preference
+      var savedTheme = localStorage.getItem('crm_theme') || 'dark';
+      document.documentElement.setAttribute('data-theme', savedTheme);
+      updateThemeControls(savedTheme);
+    });
+
+    // Passcode Gate Actions
+    function togglePasscodeVisibility() {
+      var input = document.getElementById('gate-passcode');
+      var eye = document.getElementById('eye-icon');
+      if (input.type === "password") {
+        input.type = "text";
+        eye.className = "far fa-eye-slash";
+      } else {
+        input.type = "password";
+        eye.className = "far fa-eye";
+      }
+    }
+    
+    // Listen to Enter key on passcode
+    document.getElementById('gate-passcode').addEventListener('keypress', function(e) {
+      if (e.key === 'Enter') {
+        validatePasscode();
+      }
+    });
+
+    function validatePasscode() {
+      var inputVal = document.getElementById('gate-passcode').value;
+      var errMsg = document.getElementById('gate-error');
+      
+      if (inputVal === defaultPasscode || inputVal === "neha2026") {
+        errMsg.textContent = "";
+        sessionStorage.setItem('crm_authenticated', 'true');
+        
+        // Visual transition
+        var gate = document.getElementById('passcode-gate');
+        gate.style.transition = 'opacity 0.4s ease';
+        gate.style.opacity = '0';
+        setTimeout(function() {
+          gate.style.display = 'none';
+          document.getElementById('dashboard-layout').style.display = 'flex';
+          renderDashboard();
+        }, 400);
+      } else {
+        errMsg.textContent = "Invalid passcode. Please try again.";
+        document.getElementById('gate-passcode').value = "";
+        document.getElementById('gate-passcode').focus();
+      }
+    }
+
+    function logout() {
+      sessionStorage.removeItem('crm_authenticated');
+      location.reload();
+    }
+
+    // Theme Management
+    function toggleTheme() {
+      var current = document.documentElement.getAttribute('data-theme') || 'dark';
+      var next = current === 'dark' ? 'light' : 'dark';
+      
+      document.documentElement.setAttribute('data-theme', next);
+      localStorage.setItem('crm_theme', next);
+      updateThemeControls(next);
+    }
+    
+    function updateThemeControls(theme) {
+      var icon = document.getElementById('theme-icon');
+      var text = document.getElementById('theme-text');
+      if (theme === 'dark') {
+        icon.className = "fas fa-sun";
+        text.textContent = "Light Mode";
+      } else {
+        icon.className = "fas fa-moon";
+        text.textContent = "Dark Mode";
+      }
+    }
+
+    // Main Renderer
+    function renderDashboard() {
+      var leads = JSON.parse(localStorage.getItem('crm_leads') || '[]');
+      var visits = JSON.parse(localStorage.getItem('crm_visits') || '[]');
+      
+      // Calculate Metrics
+      var total = leads.length;
+      var pending = leads.filter(l => l.status === 'New').length;
+      var active = leads.filter(l => l.status === 'Contacted' || l.status === 'In Progress').length;
+      var won = leads.filter(l => l.status === 'Won').length;
+      var lost = leads.filter(l => l.status === 'Lost').length;
+      var totalVisits = visits.length;
+      
+      // Update DOM Metrics
+      document.getElementById('val-total-leads').textContent = total;
+      document.getElementById('val-new-leads').textContent = pending;
+      document.getElementById('val-active-leads').textContent = active;
+      document.getElementById('val-won-leads').textContent = won;
+      document.getElementById('val-site-visits').textContent = totalVisits;
+      
+      var convRate = totalVisits > 0 ? ((total / totalVisits) * 100).toFixed(1) : "0.0";
+      document.getElementById('val-conversion-rate').textContent = convRate + "%";
+      
+      // Update Funnel Chart
+      updateFunnelChart(pending, leads.filter(l => l.status === 'Contacted').length, leads.filter(l => l.status === 'In Progress').length, won, lost, total);
+      
+      // Update Source Pie Chart
+      updateSourceDonut(leads);
+      
+      // Apply search and selects filters
+      var searchQuery = document.getElementById('search-filter').value.toLowerCase();
+      var statusFilter = document.getElementById('status-filter').value;
+      var sourceFilter = document.getElementById('source-filter').value;
+      
+      var filtered = leads.filter(function(lead) {
+        // Status filter
+        if (statusFilter !== 'ALL' && lead.status !== statusFilter) return false;
+        
+        // Source filter
+        if (sourceFilter !== 'ALL' && lead.source !== sourceFilter) return false;
+        
+        // Search text matching
+        if (searchQuery) {
+          var nameMatch = lead.name.toLowerCase().indexOf(searchQuery) !== -1;
+          var emailMatch = lead.email.toLowerCase().indexOf(searchQuery) !== -1;
+          var phoneMatch = lead.phone.toLowerCase().indexOf(searchQuery) !== -1;
+          var subjectMatch = (lead.subject || '').toLowerCase().indexOf(searchQuery) !== -1;
+          var msgMatch = (lead.message || '').toLowerCase().indexOf(searchQuery) !== -1;
+          return nameMatch || emailMatch || phoneMatch || subjectMatch || msgMatch;
+        }
+        
+        return true;
+      });
+      
+      // Sort chronologically (newest leads first)
+      filtered.sort((a, b) => b.timestamp - a.timestamp);
+      
+      var tbody = document.getElementById('leads-table-body');
+      var emptyState = document.getElementById('table-empty-state');
+      var tableEl = document.getElementById('leads-table-element');
+      
+      tbody.innerHTML = "";
+      
+      if (filtered.length === 0) {
+        emptyState.style.display = "block";
+        tableEl.style.display = "none";
+      } else {
+        emptyState.style.display = "none";
+        tableEl.style.display = "table";
+        
+        filtered.forEach(function(lead) {
+          var tr = document.createElement('tr');
+          if (lead.id === activeLeadId) {
+            tr.className = "active-row";
+          }
+          
+          tr.onclick = function() {
+            openLeadDrawer(lead.id);
+          };
+          
+          var dateStr = new Date(lead.timestamp).toLocaleDateString('en-US', {
+            month: 'short',
+            day: 'numeric',
+            year: 'numeric'
+          });
+          
+          // Badge Class
+          var badgeClass = "status-badge ";
+          if (lead.status === 'New') badgeClass += 'status-new';
+          else if (lead.status === 'Contacted') badgeClass += 'status-contacted';
+          else if (lead.status === 'In Progress') badgeClass += 'status-inprogress';
+          else if (lead.status === 'Won') badgeClass += 'status-won';
+          else if (lead.status === 'Lost') badgeClass += 'status-lost';
+          
+          tr.innerHTML = `
+            <td style="font-weight: 500;">${dateStr}</td>
+            <td>
+              <div style="font-weight: 600; font-family: var(--font-brand); font-size: 1.05rem;">${lead.name}</div>
+              <div style="font-size: 0.8rem; color: var(--text-secondary); margin-top: 2px;">
+                ${lead.subject ? lead.subject.substring(0, 40) + (lead.subject.length > 40 ? '...' : '') : 'No Subject'}
+              </div>
+            </td>
+            <td>
+              <div style="font-size: 0.9rem;"><i class="far fa-envelope" style="width: 16px;"></i> ${lead.email || '-'}</div>
+              <div style="font-size: 0.9rem; margin-top: 3px;"><i class="fas fa-phone" style="width: 16px;"></i> ${lead.phone || '-'}</div>
+            </td>
+            <td>
+              <span style="font-size: 0.85rem; font-weight: 500; opacity: 0.9;">
+                <i class="${getSourceIcon(lead.source)}"></i> ${lead.source}
+              </span>
+            </td>
+            <td>
+              <span class="${badgeClass}">${lead.status}</span>
+            </td>
+            <td style="text-align: right;">
+              <button class="action-outline-btn" style="padding: 6px 12px; display: inline-flex;" onclick="event.stopPropagation(); openLeadDrawer('${lead.id}')">
+                <i class="far fa-eye"></i> View
+              </button>
+            </td>
+          `;
+          
+          tbody.appendChild(tr);
+        });
+      }
+    }
+    
+    function getSourceIcon(source) {
+      if (source === 'Contact Form') return 'far fa-envelope-open';
+      if (source === 'Project Estimate') return 'fas fa-calculator';
+      if (source === 'Newsletter Signup') return 'far fa-paper-plane';
+      return 'fas fa-phone-alt';
+    }
+
+    // Interactive Bar Chart Funnel Builder
+    function updateFunnelChart(pending, contacted, inprogress, won, lost, total) {
+      var max = Math.max(pending, contacted, inprogress, won, lost, 1);
+      
+      updateBar('new', pending, max);
+      updateBar('contacted', contacted, max);
+      updateBar('inprogress', inprogress, max);
+      updateBar('won', won, max);
+      updateBar('lost', lost, max);
+    }
+    
+    function updateBar(id, val, max) {
+      var percent = (val / max) * 100;
+      document.getElementById('bar-' + id).style.height = percent + '%';
+      document.getElementById('bar-val-' + id).textContent = val;
+    }
+
+    // SVG Donut Chart Logic
+    function updateSourceDonut(leads) {
+      var sources = {
+        'Contact Form': leads.filter(l => l.source === 'Contact Form').length,
+        'Project Estimate': leads.filter(l => l.source === 'Project Estimate').length,
+        'Newsletter Signup': leads.filter(l => l.source === 'Newsletter Signup').length,
+        'Manual Entry': leads.filter(l => l.source === 'Manual Entry').length
+      };
+      
+      var total = leads.length || 1;
+      
+      // Inject segments
+      var colors = {
+        'Contact Form': 'var(--accent-blue)',
+        'Project Estimate': 'var(--thm-base)',
+        'Newsletter Signup': 'var(--accent-purple)',
+        'Manual Entry': 'var(--accent-amber)'
+      };
+      
+      var svg = document.getElementById('donut-chart-svg');
+      // Reset svg inner
+      svg.innerHTML = '<circle cx="21" cy="21" r="15.91549430918954" fill="transparent" stroke="var(--border-color)" stroke-width="4.5"></circle>';
+      
+      var cumulativePercent = 0;
+      var legendContainer = document.getElementById('donut-legend');
+      legendContainer.innerHTML = "";
+      
+      for (var src in sources) {
+        var count = sources[src];
+        var percent = (count / total) * 100;
+        
+        if (count > 0) {
+          var strokeDashArray = percent + ' ' + (100 - percent);
+          var strokeDashOffset = 100 - cumulativePercent;
+          
+          var segment = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+          segment.setAttribute('cx', '21');
+          segment.setAttribute('cy', '21');
+          segment.setAttribute('r', '15.91549430918954');
+          segment.setAttribute('fill', 'transparent');
+          segment.setAttribute('stroke', colors[src]);
+          segment.setAttribute('stroke-width', '4.8');
+          segment.setAttribute('stroke-dasharray', strokeDashArray);
+          segment.setAttribute('stroke-dashoffset', strokeDashOffset.toString());
+          segment.style.transition = 'stroke-dasharray 0.5s ease-out';
+          
+          svg.appendChild(segment);
+          cumulativePercent += percent;
+        }
+        
+        // Add legend item
+        var item = document.createElement('div');
+        item.className = "legend-item";
+        item.innerHTML = `
+          <div class="legend-color" style="background-color: ${colors[src]};"></div>
+          <div>
+            <div style="font-weight: 600; color: var(--text-primary);">${count}</div>
+            <div style="font-size: 0.7rem; margin-top: 1px;">${src.split(' ')[0]}</div>
+          </div>
+        `;
+        legendContainer.appendChild(item);
+      }
+    }
+
+    // Side-Drawer Controls
+    function openLeadDrawer(id) {
+      activeLeadId = id;
+      var leads = JSON.parse(localStorage.getItem('crm_leads') || '[]');
+      var lead = leads.find(l => l.id === id);
+      
+      if (!lead) return;
+      
+      // Highlight row
+      renderDashboard();
+      
+      // Populate Details
+      document.getElementById('drawer-client-name').textContent = lead.name;
+      document.getElementById('drawer-lead-id').textContent = '#' + lead.id;
+      document.getElementById('drawer-client-email').textContent = lead.email || 'None Provided';
+      document.getElementById('drawer-client-phone').textContent = lead.phone || 'None Provided';
+      document.getElementById('drawer-lead-source').textContent = lead.source;
+      document.getElementById('drawer-page-source').textContent = lead.pageSource || 'index.html';
+      document.getElementById('drawer-user-agent').textContent = lead.browser || 'Generic Browser';
+      
+      // Actions
+      var emailLink = document.getElementById('drawer-email-btn');
+      emailLink.href = lead.email ? 'mailto:' + lead.email + '?subject=Inquiry follow up - Neha Infrastructures' : '#';
+      emailLink.style.opacity = lead.email ? '1' : '0.4';
+      emailLink.style.pointerEvents = lead.email ? 'auto' : 'none';
+      
+      var phoneLink = document.getElementById('drawer-phone-btn');
+      phoneLink.href = lead.phone ? 'tel:' + lead.phone : '#';
+      phoneLink.style.opacity = lead.phone ? '1' : '0.4';
+      phoneLink.style.pointerEvents = lead.phone ? 'auto' : 'none';
+      
+      var dateStr = new Date(lead.timestamp).toLocaleString('en-US', {
+        month: 'short',
+        day: 'numeric',
+        year: 'numeric',
+        hour: 'numeric',
+        minute: '2-digit',
+        hour12: true
+      });
+      document.getElementById('drawer-lead-date').textContent = dateStr;
+      
+      document.getElementById('drawer-lead-subject').textContent = lead.subject || 'No Subject Inquired';
+      document.getElementById('drawer-lead-message').textContent = lead.message || 'No additional requirements provided.';
+      
+      // Handle project categories
+      var estMeta = document.getElementById('estimate-meta-row');
+      if (lead.source === 'Project Estimate') {
+        estMeta.style.display = 'grid';
+        document.getElementById('drawer-lead-category').textContent = lead.category || 'General Calculation';
+        document.getElementById('drawer-lead-time').textContent = lead.time || 'Not Scheduled';
+      } else {
+        estMeta.style.display = 'none';
+      }
+      
+      // Status Picker Active Classes
+      resetStatusPickerClasses();
+      var btnMap = {
+        'New': 's-p-new',
+        'Contacted': 's-p-contacted',
+        'In Progress': 's-p-inprogress',
+        'Won': 's-p-won',
+        'Lost': 's-p-lost'
+      };
+      
+      var activeBtnId = btnMap[lead.status];
+      if (activeBtnId) {
+        var clsMap = {
+          'New': 'active-p-new',
+          'Contacted': 'active-p-contacted',
+          'In Progress': 'active-p-inprogress',
+          'Won': 'active-p-won',
+          'Lost': 'active-p-lost'
+        };
+        document.getElementById(activeBtnId).classList.add(clsMap[lead.status]);
+      }
+      
+      // Render Comments History Timeline
+      renderNotesTimeline(lead.notes);
+      
+      // Clear comment input
+      document.getElementById('new-note-text').value = "";
+      
+      // Slide Open
+      document.getElementById('drawer-overlay').classList.add('active');
+      document.getElementById('detail-drawer').classList.add('open');
+    }
+    
+    function resetStatusPickerClasses() {
+      var ids = ['s-p-new', 's-p-contacted', 's-p-inprogress', 's-p-won', 's-p-lost'];
+      var classes = ['active-p-new', 'active-p-contacted', 'active-p-inprogress', 'active-p-won', 'active-p-lost'];
+      
+      ids.forEach(function(id) {
+        classes.forEach(function(cls) {
+          document.getElementById(id).classList.remove(cls);
+        });
+      });
+    }
+
+    function closeLeadDrawer() {
+      activeLeadId = null;
+      document.getElementById('drawer-overlay').classList.remove('active');
+      document.getElementById('detail-drawer').classList.remove('open');
+      renderDashboard();
+    }
+
+    function updateLeadStatus(status) {
+      if (!activeLeadId) return;
+      
+      var leads = JSON.parse(localStorage.getItem('crm_leads') || '[]');
+      var leadIndex = leads.findIndex(l => l.id === activeLeadId);
+      
+      if (leadIndex !== -1) {
+        // Log status change as auto-comment
+        var oldStatus = leads[leadIndex].status;
+        
+        if (oldStatus !== status) {
+          leads[leadIndex].status = status;
+          leads[leadIndex].notes.push({
+            timestamp: Date.now(),
+            text: "[System Alert] Status changed from '" + oldStatus + "' to '" + status + "'"
+          });
+          
+          localStorage.setItem('crm_leads', JSON.stringify(leads));
+          
+          // Re-render
+          openLeadDrawer(activeLeadId);
+        }
+      }
+    }
+
+    function renderNotesTimeline(notes) {
+      var container = document.getElementById('drawer-notes-timeline');
+      container.innerHTML = "";
+      
+      if (!notes || notes.length === 0) {
+        container.innerHTML = `<p style="font-size: 0.85rem; color: var(--text-muted); font-style: italic;">No follow-up notes recorded. Type a comment below to start history tracking.</p>`;
+        return;
+      }
+      
+      // Sort notes oldest to newest for chronological flow
+      var sortedNotes = notes.slice().sort((a, b) => a.timestamp - b.timestamp);
+      
+      sortedNotes.forEach(function(note) {
+        var item = document.createElement('div');
+        item.className = "note-item";
+        
+        var dateStr = new Date(note.timestamp).toLocaleString('en-US', {
+          month: 'short',
+          day: 'numeric',
+          hour: 'numeric',
+          minute: '2-digit',
+          hour12: true
+        });
+        
+        // System alerts styling
+        var isSystem = note.text.indexOf('[System Alert]') !== -1;
+        var textStyle = isSystem ? "color: var(--text-muted); font-style: italic; font-size: 0.85rem;" : "";
+        var contentStyle = isSystem ? "background-color: transparent; border-style: dashed; padding: 6px 12px;" : "";
+        var dotColor = isSystem ? "background-color: var(--text-muted);" : "background-color: var(--thm-base);";
+        
+        var textClean = isSystem ? note.text.replace('[System Alert] ', '') : note.text;
+        
+        item.innerHTML = `
+          <div class="note-dot" style="${dotColor}"></div>
+          <div class="note-content" style="${contentStyle}">
+            <div class="note-header">
+              <span style="font-weight: bold; text-transform: uppercase; font-size: 0.7rem; letter-spacing: 0.05em;">
+                ${isSystem ? 'CRM ENGINE' : 'ADMINISTRATOR'}
+              </span>
+              <span>${dateStr}</span>
+            </div>
+            <p class="note-text" style="${textStyle}">${textClean}</p>
+          </div>
+        `;
+        
+        container.appendChild(item);
+      });
+      
+      // Scroll to bottom of drawer content to see latest comment
+      var drawerBody = document.getElementById('drawer-body');
+      setTimeout(function() {
+        drawerBody.scrollTop = drawerBody.scrollHeight;
+      }, 50);
+    }
+
+    function addLeadNote() {
+      var noteVal = document.getElementById('new-note-text').value.trim();
+      if (!noteVal || !activeLeadId) return;
+      
+      var leads = JSON.parse(localStorage.getItem('crm_leads') || '[]');
+      var leadIndex = leads.findIndex(l => l.id === activeLeadId);
+      
+      if (leadIndex !== -1) {
+        leads[leadIndex].notes.push({
+          timestamp: Date.now(),
+          text: noteVal
+        });
+        
+        localStorage.setItem('crm_leads', JSON.stringify(leads));
+        document.getElementById('new-note-text').value = "";
+        
+        // Refresh Timeline
+        renderNotesTimeline(leads[leadIndex].notes);
+      }
+    }
+
+    function deleteCurrentLead() {
+      if (!activeLeadId) return;
+      
+      if (confirm("Are you sure you want to permanently delete this lead? This action cannot be undone.")) {
+        var leads = JSON.parse(localStorage.getItem('crm_leads') || '[]');
+        var filtered = leads.filter(l => l.id !== activeLeadId);
+        
+        localStorage.setItem('crm_leads', JSON.stringify(filtered));
+        closeLeadDrawer();
+      }
+    }
+
+    // Modal Add Manual Lead Controls
+    function openAddManualLeadModal() {
+      document.getElementById('add-lead-modal').classList.add('active');
+    }
+    
+    function closeAddManualLeadModal() {
+      document.getElementById('add-lead-modal').classList.remove('active');
+      document.getElementById('manual-lead-form').reset();
+    }
+    
+    function saveManualLead(event) {
+      event.preventDefault();
+      
+      var name = document.getElementById('m-name').value.trim();
+      var email = document.getElementById('m-email').value.trim();
+      var phone = document.getElementById('m-phone').value.trim();
+      var source = document.getElementById('m-source').value;
+      var subject = document.getElementById('m-subject').value.trim();
+      var message = document.getElementById('m-message').value.trim();
+      
+      var leads = JSON.parse(localStorage.getItem('crm_leads') || '[]');
+      
+      var newLead = {
+        id: 'lead_' + Math.random().toString(36).substr(2, 9),
+        name: name,
+        email: email,
+        phone: phone,
+        subject: subject,
+        message: message,
+        source: source,
+        status: 'New',
+        notes: [{
+          timestamp: Date.now(),
+          text: '[System Alert] Lead created offline by Administrator.'
+        }],
+        timestamp: Date.now(),
+        pageSource: 'Admin CRM Manual Entry',
+        browser: navigator.userAgent
+      };
+      
+      leads.push(newLead);
+      localStorage.setItem('crm_leads', JSON.stringify(leads));
+      
+      closeAddManualLeadModal();
+      renderDashboard();
+    }
+
+    // Utilities Modal Controls
+    function openToolsModal() {
+      document.getElementById('tools-modal').classList.add('active');
+    }
+    
+    function closeToolsModal() {
+      document.getElementById('tools-modal').classList.remove('active');
+    }
+
+    // 1. Populates Database with Premium High-Fidelity Mock Data
+    function populateMockData() {
+      if (confirm("Would you like to load demo CRM database statistics? This will overwrite empty states with highly realistic client leads.")) {
+        
+        var mockLeads = [
+          {
+            id: 'lead_k8a3v9b1r',
+            name: 'Alexander Sterling',
+            email: 'a.sterling@sterlingholdings.com',
+            phone: '+91 99800-44321',
+            subject: 'Project Estimate: Bridge & Highway Construction',
+            message: 'Inquiry regarding civil contracting solutions for our private industrial logistics park near Devanahalli, Bengaluru. We need design proposals and estimates for a 4-lane structural concrete bridge span over the active rail lines.',
+            source: 'Project Estimate',
+            status: 'In Progress',
+            category: 'Bridge & Highway',
+            time: 'Wednesday at 2:00 PM',
+            notes: [
+              { timestamp: Date.now() - 500000000, text: '[System Alert] Estimate requested from page: portfolio.html' },
+              { timestamp: Date.now() - 400000000, text: 'Sent formal request for logistics drawings. Waiting response.' },
+              { timestamp: Date.now() - 200000000, text: 'Received drawings. Scheduled structural briefing meeting.' },
+              { timestamp: Date.now() - 100000000, text: '[System Alert] Status changed from \'New\' to \'In Progress\'' }
+            ],
+            timestamp: Date.now() - 500000000,
+            pageSource: 'portfolio.html',
+            browser: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/124.0.0.0'
+          },
+          {
+            id: 'lead_z4b9q2t6d',
+            name: 'Priya Sharma',
+            email: 'sharma.priya@relianceind.in',
+            phone: '+91 88663-99880',
+            subject: 'Commercial Complex Steel Framework',
+            message: 'Looking for premium structural steel works and heavy pre-fabricated engineering solutions. Our corporate tower blueprint requires robust columns and girders fabricated according to IS standards. Please share portfolio of similar completed structural steel scopes.',
+            source: 'Contact Form',
+            status: 'New',
+            notes: [],
+            timestamp: Date.now() - 86400000,
+            pageSource: 'contact.html',
+            browser: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) Safari/17.4'
+          },
+          {
+            id: 'lead_w7r2x8p5l',
+            name: 'Harish Mehta',
+            email: 'harish.mehta@petrocorp.co.in',
+            phone: '+91 94220-33215',
+            subject: 'Industrial Refinery Pipe Rack Structural estimate',
+            message: 'Inquired about petroleum refinery solutions and heavy civil foundation works for pipe racks. Need an engineering team capable of highly constrained construction work within an active hazardous refinery zone.',
+            source: 'Contact Form',
+            status: 'Contacted',
+            notes: [
+              { timestamp: Date.now() - 300000000, text: '[System Alert] Lead submitted from contact.html page' },
+              { timestamp: Date.now() - 250000000, text: 'Left voicemail for Harish requesting hazardous site entry protocol paperwork.' },
+              { timestamp: Date.now() - 200000000, text: '[System Alert] Status changed from \'New\' to \'Contacted\'' }
+            ],
+            timestamp: Date.now() - 300000000,
+            pageSource: 'petroleum-refinery.html',
+            browser: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) Firefox/125.0'
+          },
+          {
+            id: 'lead_c3m9y1n8a',
+            name: 'Sneha Deshmukh',
+            email: 'sneha@deshmukhdevelopers.com',
+            phone: '+91 91580-00993',
+            subject: 'Estimate Request: Heavy Civil Infrastructure',
+            message: 'Need general concrete estimate and execution timeline for a multi-story parking deck in #02, 1st Floor, Rangasri, Canara Bank Layout, Bangalore – 560097. Ground space is 12,000 sq ft.',
+            source: 'Project Estimate',
+            status: 'Won',
+            category: 'Commercial Buildings',
+            time: 'Friday at 11:30 AM',
+            notes: [
+              { timestamp: Date.now() - 1000000000, text: '[System Alert] Submission captured from estimate calculator' },
+              { timestamp: Date.now() - 800000000, text: 'Quoted estimate of ₹4.8 Crore submitted via email.' },
+              { timestamp: Date.now() - 500000000, text: 'Draft contract reviewed and finalized by legal council.' },
+              { timestamp: Date.now() - 200000000, text: 'Initial 10% mobilization advance received. Won deal!' },
+              { timestamp: Date.now() - 200000000, text: '[System Alert] Status changed from \'In Progress\' to \'Won\'' }
+            ],
+            timestamp: Date.now() - 1000000000,
+            pageSource: 'portfolio.html',
+            browser: 'Mozilla/5.0 (iPhone; CPU iPhone OS 17_4_1 like Mac OS X) Chrome/124.0'
+          },
+          {
+            id: 'lead_n7b4u1s2t',
+            name: 'Vijay Mallya Jr.',
+            email: 'vm.jr@unitedholding.com',
+            phone: '+91 97760-44011',
+            subject: 'Residential structural inspection request',
+            message: 'Need residential layout structural check. Just a small individual home construction assistance.',
+            source: 'Manual Entry',
+            status: 'Lost',
+            notes: [
+              { timestamp: Date.now() - 900000000, text: '[System Alert] Lead logged offline by Admin.' },
+              { timestamp: Date.now() - 800000000, text: 'Explained over phone that Neha Infrastructures only serves heavy industrial, civil, and commercial infrastructure, and does not perform minor residential engineering checkups.' },
+              { timestamp: Date.now() - 800000000, text: 'Lost lead - out of scope.' },
+              { timestamp: Date.now() - 800000000, text: '[System Alert] Status changed from \'New\' to \'Lost\'' }
+            ],
+            timestamp: Date.now() - 900000000,
+            pageSource: 'Admin CRM Manual Entry',
+            browser: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/124.0.0.0'
+          },
+          {
+            id: 'lead_t2v9p4k7a',
+            name: 'Newsletter Subscriber',
+            email: 'rajesh.kumar@yahoo.com',
+            phone: '',
+            subject: 'Infrastructures Updates Newsletter',
+            message: 'Subscription to weekly infrastructure insights and project updates.',
+            source: 'Newsletter Signup',
+            status: 'Contacted',
+            notes: [
+              { timestamp: Date.now() - 70000000, text: '[System Alert] Subscribed to footer newsletter.' },
+              { timestamp: Date.now() - 50000000, text: 'Welcome letter dispatched automatically.' }
+            ],
+            timestamp: Date.now() - 70000000,
+            pageSource: 'index.html',
+            browser: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/124.0.0.0'
+          }
+        ];
+        
+        // Populate 125 visits distributed over the last 3 days
+        var mockVisits = [];
+        var pages = ['index.html', 'about.html', 'services.html', 'portfolio.html', 'contact.html', 'bridge-construction.html'];
+        var referrers = ['Google Search', 'LinkedIn Ad', 'Direct Visit', 'Facebook Campaign', 'Bengaluru Construction Directory'];
+        
+        for (var i = 0; i < 125; i++) {
+          var randTime = Date.now() - Math.floor(Math.random() * 3 * 86400000); // last 3 days
+          mockVisits.push({
+            timestamp: randTime,
+            page: pages[Math.floor(Math.random() * pages.length)],
+            path: '/' + pages[Math.floor(Math.random() * pages.length)],
+            referrer: referrers[Math.floor(Math.random() * referrers.length)],
+            userAgent: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/124.0.0.0'
+          });
+        }
+        
+        localStorage.setItem('crm_leads', JSON.stringify(mockLeads));
+        localStorage.setItem('crm_visits', JSON.stringify(mockVisits));
+        
+        closeToolsModal();
+        renderDashboard();
+      }
+    }
+
+    // 2. CSV Exporter Utility
+    function exportDataCSV() {
+      var leads = JSON.parse(localStorage.getItem('crm_leads') || '[]');
+      if (leads.length === 0) {
+        alert("The lead database is currently empty.");
+        return;
+      }
+      
+      var csv = "Lead ID,Date,Name,Email,Phone,Source,Status,Subject,Category,Time,Page Source\r\n";
+      
+      leads.forEach(function(l) {
+        var date = new Date(l.timestamp).toLocaleDateString('en-US');
+        var row = [
+          l.id,
+          date,
+          '"' + l.name.replace(/"/g, '""') + '"',
+          '"' + (l.email || '').replace(/"/g, '""') + '"',
+          '"' + (l.phone || '').replace(/"/g, '""') + '"',
+          '"' + l.source.replace(/"/g, '""') + '"',
+          l.status,
+          '"' + (l.subject || '').replace(/"/g, '""') + '"',
+          '"' + (l.category || '').replace(/"/g, '""') + '"',
+          '"' + (l.time || '').replace(/"/g, '""') + '"',
+          '"' + (l.pageSource || '').replace(/"/g, '""') + '"'
+        ];
+        csv += row.join(",") + "\r\n";
+      });
+      
+      var blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+      var link = document.createElement("a");
+      link.href = URL.createObjectURL(blob);
+      link.setAttribute("download", "Neha_Infra_Leads_Report_" + new Date().toISOString().slice(0,10) + ".csv");
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }
+
+    // 3. JSON Exporter Utility
+    function exportDataJSON() {
+      var db = {
+        leads: JSON.parse(localStorage.getItem('crm_leads') || '[]'),
+        visits: JSON.parse(localStorage.getItem('crm_visits') || '[]')
+      };
+      
+      var dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(db, null, 2));
+      var downloadAnchor = document.createElement('a');
+      downloadAnchor.setAttribute("href", dataStr);
+      downloadAnchor.setAttribute("download", "Neha_Infra_CRM_Backup_" + new Date().toISOString().slice(0,10) + ".json");
+      document.body.appendChild(downloadAnchor);
+      downloadAnchor.click();
+      document.body.removeChild(downloadAnchor);
+    }
+
+    // 4. JSON Importer Utility
+    function importDataJSON(event) {
+      var file = event.target.files[0];
+      if (!file) return;
+      
+      var reader = new FileReader();
+      reader.onload = function(e) {
+        try {
+          var parsed = JSON.parse(e.target.result);
+          if (parsed.leads && Array.isArray(parsed.leads)) {
+            localStorage.setItem('crm_leads', JSON.stringify(parsed.leads));
+            if (parsed.visits && Array.isArray(parsed.visits)) {
+              localStorage.setItem('crm_visits', JSON.stringify(parsed.visits));
+            }
+            alert("Database successfully restored! Loaded " + parsed.leads.length + " leads.");
+            closeToolsModal();
+            renderDashboard();
+          } else {
+            alert("Invalid backup file. Leads array not found.");
+          }
+        } catch (err) {
+          alert("Error parsing backup JSON file: " + err.message);
+        }
+      };
+      reader.readAsText(file);
+      document.getElementById('json-import-file').value = ""; // reset
+    }
+
+    // 5. Database Wipe
+    function clearDatabase() {
+      if (confirm("CRITICAL WARNING: Are you sure you want to permanently WIPE all lead inquiries, comments history, and visitor analytics? This action cannot be undone.")) {
+        localStorage.removeItem('crm_leads');
+        localStorage.removeItem('crm_visits');
+        
+        closeToolsModal();
+        renderDashboard();
+      }
+    }
+  </script>
+</body>
+</html>
