@@ -34,7 +34,7 @@ function makeMenu(hasLine, filename) {
     const homeCls = "dropdown" + (isHome ? " current" : "");
     const aboutCls = "" + (isAbout ? "current" : "");
     const servicesCls = "dropdown" + (isServices ? " current" : "");
-    const portfolioCls = "" + (isPortfolio ? "current" : "");
+    const portfolioCls = "dropdown" + (isPortfolio ? " current" : "");
     const contactCls = "" + (isContact ? "current" : "");
 
     const lineSpan = hasLine ? ' <span class="line"></span>' : '';
@@ -77,7 +77,11 @@ function makeMenu(hasLine, filename) {
                                                  </li>
 
                                                  <li class="${portfolioCls}">
-                                                     <a href="portfolio.html">Completed Projects${lineSpan}</a>
+                                                     <a href="portfolio.html">Portfolio${lineSpan}</a>
+                                                     <ul>
+                                                         <li><a href="portfolio.html">Portfolio</a></li>
+                                                         <li><a href="portfolio-details.html">Portfolio Details</a></li>
+                                                     </ul>
                                                  </li>
 
                                                  <li class="${contactCls}">
