@@ -15,7 +15,11 @@ const targetFiles = [
     "residential-building.html",
     "road-development.html",
     "stormwater-drains.html",
-    "index-4.html"
+    "index-4.html",
+    "blog.html",
+    "blog-details.html",
+    "team.html",
+    "team-details.html"
 ];
 
 // 1. Read index.html to extract the Header Two block

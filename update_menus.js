@@ -14,7 +14,11 @@ const filesWithLine = [
     "lift-irrigation.html",
     "residential-building.html",
     "road-development.html",
-    "stormwater-drains.html"
+    "stormwater-drains.html",
+    "blog.html",
+    "blog-details.html",
+    "team.html",
+    "team-details.html"
 ];
 
 const filesNoLine = [
@@ -77,10 +81,10 @@ function makeMenu(hasLine, filename) {
                                                  </li>
 
                                                  <li class="${portfolioCls}">
-                                                     <a href="portfolio.html">Portfolio${lineSpan}</a>
+                                                     <a href="portfolio.html">Completed Projects${lineSpan}</a>
                                                      <ul>
-                                                         <li><a href="portfolio.html">Portfolio</a></li>
-                                                         <li><a href="portfolio-details.html">Portfolio Details</a></li>
+                                                         <li><a href="portfolio.html">Completed Projects</a></li>
+                                                         <li><a href="portfolio-details.html">Project Details</a></li>
                                                      </ul>
                                                  </li>
 
