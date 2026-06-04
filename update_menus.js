@@ -3,7 +3,9 @@ const path = require('path');
 
 const filesWithLine = [
     "index.html",
+    "index-2.html",
     "index-3.html",
+    "index-4.html",
     "about.html",
     "services.html",
     "portfolio.html",
@@ -21,10 +23,7 @@ const filesWithLine = [
     "team-details.html"
 ];
 
-const filesNoLine = [
-    "index-2.html",
-    "index-4.html"
-];
+const filesNoLine = [];
 
 const workspaceDir = "c:\\Users\\Admin\\Documents\\GitHub\\Neha-Infra";
 
