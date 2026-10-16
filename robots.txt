@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://cherry6272.github.io/Neha-Infra/sitemap.xml
