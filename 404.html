@@ -10,6 +10,24 @@
     <link rel="manifest" href="assets/images/favicons/site.webmanifest" />
     <meta name="robots" content="noindex, follow" />
     
+    <!-- Smart Clean-URL Fallback for Static GitHub Pages -->
+    <script>
+        (function() {
+            var path = window.location.pathname;
+            var segments = path.split('/').filter(Boolean);
+            var lastSegment = segments[segments.length - 1] || '';
+            var validRoutes = [
+                'about', 'services', 'portfolio', 'contact', 'leads',
+                'residential-building', 'road-development', 'stormwater-drains',
+                'lift-irrigation', 'composite-housing', 'civil-earthworks', 'portfolio-details'
+            ];
+            if (validRoutes.includes(lastSegment)) {
+                var newUrl = path.replace(new RegExp(lastSegment + '$'), lastSegment + '.html') + window.location.search + window.location.hash;
+                window.location.replace(newUrl);
+            }
+        })();
+    </script>
+    
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Saira+Semi+Condensed:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="assets/vendors/bootstrap/css/bootstrap.min.css" />
