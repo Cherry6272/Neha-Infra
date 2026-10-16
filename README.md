@@ -1,8 +1,8 @@
 # M/s Neha Infrastructures — Official Corporate Website
 
-[![Class-I Civil Contractor](https://img.shields.io/badge/Category-Class--I%20Civil%20Contractor-6D963D.svg)](#)
-[![Deployment](https://img.shields.io/badge/Deployment-GitHub%20Pages-12263A.svg)](https://cherry6272.github.io/Neha-Infra/)
-[![Location](https://img.shields.io/badge/Headquarters-Bangalore%2C%20Karnataka-blue.svg)](#)
+[![Class-I Civil Contractor](https://img.shields.io/badge/Category-Class--I%20Civil%20Contractor-dd0429.svg)](#)
+[![Deployment](https://img.shields.io/badge/Deployment-GitHub%20Pages-1a1a1a.svg)](https://cherry6272.github.io/Neha-Infra/)
+[![Location](https://img.shields.io/badge/Headquarters-Bangalore%2C%20Karnataka-5a6268.svg)](#)
 
 > **Live Website:** [https://cherry6272.github.io/Neha-Infra/](https://cherry6272.github.io/Neha-Infra/)  
 > **Source Repository:** [https://github.com/Cherry6272/Neha-Infra](https://github.com/Cherry6272/Neha-Infra)
@@ -31,12 +31,12 @@ Corporate engineering and civil contracting website for **M/s Neha Infrastructur
 
 ## 2. Visual Identity & Brand System
 
-Built around a cohesive corporate civil engineering palette:
-- **Deep Navy (`#12263A`):** Core structural brand color for headers, footers, and typography.
-- **Infrastructure Green (`#6D963D`):** Accent brand color for badges, calls to action, active navigation, and certification markers.
-- **Concrete Grey (`#F2F4F5`):** Clean background contrast for cards and content sections.
-- **Primary Text (`#263443`) & Muted Text (`#687582`):** High-contrast, WCAG AAA compliant typography.
-- **Typography:** Google Fonts *Saira Semi Condensed* and *Outfit*.
+Faithfully built around M/s Neha Infrastructures' authentic corporate brand palette established by its official logo and stylesheet:
+- **Primary Brand Red (`--thm-base: #dd0429` / `rgb(221, 4, 41)`):** Sourced directly from the official logo's gear emblem and infrastructure banner. Applied to primary calls to action, active navigation lines, certification badges, and key icons.
+- **Secondary Charcoal / Jet Black (`--thm-black: #1a1a1a` / `rgb(26, 26, 26)`):** Sourced from the logo's structural typography for headers, footers, section headings, and hero backgrounds.
+- **Secondary Slate / Steel Gray (`--thm-slate: #5a6268` / `--thm-gray: #878c8f`):** Sourced from the serif 'NEHA' letterforms for metadata, subtitle badges, and muted text.
+- **Architectural Concrete (`#F4F6F8`) & Pure White (`#FFFFFF`):** High-contrast, clean backgrounds for cards and alternating content modules.
+- **Typography:** Google Fonts *Saira Semi Condensed* and *Outfit* ensuring legible, editorial hierarchy.
 
 Styles are organized cleanly in [`assets/css/neha-corporate.css`](assets/css/neha-corporate.css).
 

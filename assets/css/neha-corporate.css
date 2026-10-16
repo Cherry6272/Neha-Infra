@@ -1,35 +1,61 @@
 /*--------------------------------------------------------------
   NEHA INFRASTRUCTURES — CORPORATE VISUAL IDENTITY & THEME
-  Primary Palette:
-    Deep Navy: #12263A
-    Infrastructure Green: #6D963D
-    Concrete Grey: #F2F4F5
-    Primary Text: #263443
-    Muted Text: #687582
-    White: #FFFFFF
+  AUTHENTIC LOGO BRAND PALETTE:
+    Primary Brand Red: #dd0429 (RGB: 221, 4, 41)
+    Secondary Charcoal / Black: #1a1a1a (RGB: 26, 26, 26)
+    Secondary Slate / Steel Gray: #5a6268 / #878c8f (RGB: 135, 140, 143)
+    Precision Silver Accent: #b0b5b9
+    Architectural Concrete / Light Grey: #F4F6F8
+    Architectural White: #FFFFFF
+    Primary Text: #1a1a1a
+    Muted Text: #5a6268
 --------------------------------------------------------------*/
 
 :root {
-  --neha-navy: #12263A;
-  --neha-navy-dark: #0b1825;
-  --neha-navy-light: #1c3854;
-  --neha-green: #6D963D;
-  --neha-green-dark: #587B30;
-  --neha-green-light: #83b04c;
-  --neha-concrete: #F2F4F5;
+  /* Exact Original Brand Colors from Logo & style.css */
+  --thm-base: #dd0429;
+  --thm-base-rgb: 221, 4, 41;
+  --thm-base-hover: #bf0324;
+  --thm-base-light: rgba(221, 4, 41, 0.08);
+  --thm-base-glow: rgba(221, 4, 41, 0.18);
+
+  --thm-black: #1a1a1a;
+  --thm-black-rgb: 26, 26, 26;
+  --thm-black-dark: #121417;
+  --thm-black-light: #25282d;
+
+  --thm-gray: #878c8f;
+  --thm-gray-rgb: 135, 140, 143;
+  --thm-slate: #5a6268;
+  --thm-silver: #b0b5b9;
+
+  /* Neha Design Tokens */
+  --neha-red: #dd0429;
+  --neha-red-hover: #bf0324;
+  --neha-red-light: rgba(221, 4, 41, 0.08);
+  --neha-red-glow: rgba(221, 4, 41, 0.2);
+
+  --neha-black: #1a1a1a;
+  --neha-black-dark: #121417;
+  --neha-black-light: #25282d;
+
+  --neha-slate: #5a6268;
+  --neha-silver: #b0b5b9;
+
+  --neha-concrete: #F4F6F8;
   --neha-concrete-dark: #E4E7EA;
-  --neha-text: #263443;
-  --neha-text-muted: #687582;
+  --neha-text: #1a1a1a;
+  --neha-text-muted: #5a6268;
   --neha-border: #DDE2E7;
   --neha-white: #FFFFFF;
 
-  /* Override legacy template variables */
-  --thm-base: #6D963D;
-  --thm-base-rgb: 109, 150, 61;
-  --thm-black: #12263A;
-  --thm-black-rgb: 18, 38, 58;
-  --thm-gray: #687582;
-  --thm-gray-rgb: 104, 117, 130;
+  /* Aliases for consistent corporate rendering */
+  --neha-navy: #1a1a1a;
+  --neha-navy-dark: #121417;
+  --neha-navy-light: #25282d;
+  --neha-green: #dd0429;
+  --neha-green-dark: #bf0324;
+  --neha-green-light: rgba(221, 4, 41, 0.12);
 }
 
 /* Base Body & Typography */
@@ -42,7 +68,7 @@ body {
 }
 
 h1, h2, h3, h4, h5, h6 {
-  color: var(--neha-navy);
+  color: var(--neha-black);
   font-family: 'Saira Semi Condensed', sans-serif;
   font-weight: 700;
   letter-spacing: -0.01em;
@@ -54,27 +80,27 @@ button:focus-visible,
 input:focus-visible,
 textarea:focus-visible,
 select:focus-visible {
-  outline: 2px solid var(--neha-green);
+  outline: 2px solid var(--neha-red);
   outline-offset: 2px;
 }
 
-/* Preloader refinement */
+/* Preloader Refinement */
 .loader-wrap {
-  background-color: var(--neha-navy);
+  background-color: var(--neha-black-dark);
 }
 .animation-preloader .spinner {
-  border-top-color: var(--neha-green) !important;
+  border-top-color: var(--neha-red) !important;
 }
 .animation-preloader .letters-loading {
   color: var(--neha-white) !important;
 }
 .animation-preloader .letters-loading:before {
-  color: var(--neha-green) !important;
+  color: var(--neha-red) !important;
 }
 
 /* Top Header Bar */
 .main-header-two__top {
-  background-color: var(--neha-navy) !important;
+  background-color: var(--neha-black) !important;
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
 
@@ -85,7 +111,7 @@ select:focus-visible {
 }
 
 .main-header-two__contact-info li .icon-box span {
-  color: var(--neha-green) !important;
+  color: var(--neha-red) !important;
 }
 
 .main-header-two__top-right .number p {
@@ -96,27 +122,27 @@ select:focus-visible {
   color: #FFFFFF !important;
 }
 .main-header-two__top-right .number p span {
-  color: var(--neha-green) !important;
+  color: var(--neha-red) !important;
 }
 
 .main-header-two__top-right .btn-box a {
-  background-color: var(--neha-green) !important;
+  background-color: var(--neha-red) !important;
   color: #FFFFFF !important;
   font-weight: 600;
   transition: all 0.3s ease;
 }
 .main-header-two__top-right .btn-box a:hover {
-  background-color: var(--neha-green-dark) !important;
+  background-color: var(--neha-red-hover) !important;
 }
 
 /* Main Navbar */
 .main-header-two__bottom {
   background-color: #FFFFFF !important;
-  box-shadow: 0 4px 20px rgba(18, 38, 58, 0.06);
+  box-shadow: 0 4px 20px rgba(26, 26, 26, 0.06);
 }
 
 .main-menu__list > li > a {
-  color: var(--neha-navy) !important;
+  color: var(--neha-black) !important;
   font-weight: 600;
   font-size: 16px;
   text-transform: uppercase;
@@ -126,73 +152,75 @@ select:focus-visible {
 
 .main-menu__list > li.current > a,
 .main-menu__list > li:hover > a {
-  color: var(--neha-green) !important;
+  color: var(--neha-red) !important;
 }
 
 .main-menu__list > li > a .line {
-  background-color: var(--neha-green) !important;
+  background-color: var(--neha-red) !important;
 }
 
 .main-menu__list li ul {
   background-color: #FFFFFF !important;
-  border-top: 3px solid var(--neha-green) !important;
-  box-shadow: 0 10px 30px rgba(18, 38, 58, 0.12) !important;
+  border-top: 3px solid var(--neha-red) !important;
+  box-shadow: 0 10px 30px rgba(26, 26, 26, 0.12) !important;
   border-radius: 0 0 6px 6px;
 }
 
 .main-menu__list li ul li a {
-  color: var(--neha-navy) !important;
+  color: var(--neha-black) !important;
   font-weight: 500;
   transition: all 0.2s ease;
 }
 
 .main-menu__list li ul li a:hover {
   background-color: var(--neha-concrete) !important;
-  color: var(--neha-green) !important;
+  color: var(--neha-red) !important;
   padding-left: 22px;
 }
 
 .main-header-one__bottom-right-btn a {
-  background-color: var(--neha-green) !important;
+  background-color: var(--neha-red) !important;
   color: #FFFFFF !important;
   border-radius: 4px;
   font-weight: 600;
 }
 .main-header-one__bottom-right-btn a:hover {
-  background-color: var(--neha-navy) !important;
+  background-color: var(--neha-black) !important;
   color: #FFFFFF !important;
 }
 
 /* Sticky Header */
 .stricky-header.stricked-menu {
   background-color: #FFFFFF !important;
-  box-shadow: 0 4px 15px rgba(18, 38, 58, 0.08);
+  box-shadow: 0 4px 15px rgba(26, 26, 26, 0.08);
 }
 .stricky-header.stricked-menu .main-menu__list > li > a {
-  color: var(--neha-navy) !important;
+  color: var(--neha-black) !important;
 }
 .stricky-header.stricked-menu .main-menu__list > li.current > a,
 .stricky-header.stricked-menu .main-menu__list > li:hover > a {
-  color: var(--neha-green) !important;
+  color: var(--neha-red) !important;
 }
 
 /* Buttons */
 .thm-btn {
-  background-color: var(--neha-green) !important;
+  background-color: var(--neha-red) !important;
   color: #FFFFFF !important;
   font-weight: 600;
   border-radius: 4px;
   transition: all 0.3s ease;
 }
 .thm-btn:before {
-  background-color: var(--neha-navy) !important;
+  background-color: var(--neha-black) !important;
 }
 .thm-btn:hover {
+  background-color: var(--neha-red-hover) !important;
   color: #FFFFFF !important;
 }
 
+.thm-btn-black,
 .thm-btn-navy {
-  background-color: var(--neha-navy) !important;
+  background-color: var(--neha-black) !important;
   color: #FFFFFF !important;
   border-radius: 4px;
   display: inline-block;
@@ -200,8 +228,9 @@ select:focus-visible {
   font-weight: 600;
   transition: all 0.3s ease;
 }
+.thm-btn-black:hover,
 .thm-btn-navy:hover {
-  background-color: var(--neha-green) !important;
+  background-color: var(--neha-red) !important;
   color: #FFFFFF !important;
 }
 
@@ -217,14 +246,14 @@ select:focus-visible {
 }
 .thm-btn-outline:hover {
   background: #FFFFFF !important;
-  color: var(--neha-navy) !important;
+  color: var(--neha-black) !important;
   border-color: #FFFFFF !important;
 }
 
 /* Hero Section Corporate Styling */
 .main-slider-corporate {
   position: relative;
-  background-color: var(--neha-navy);
+  background-color: var(--neha-black);
   background-size: cover;
   background-position: center center;
   color: #FFFFFF;
@@ -237,7 +266,7 @@ select:focus-visible {
   content: '';
   position: absolute;
   top: 0; left: 0; right: 0; bottom: 0;
-  background: linear-gradient(135deg, rgba(18, 38, 58, 0.90) 0%, rgba(18, 38, 58, 0.80) 60%, rgba(18, 38, 58, 0.65) 100%);
+  background: linear-gradient(135deg, rgba(18, 20, 24, 0.92) 0%, rgba(26, 26, 26, 0.85) 60%, rgba(221, 4, 41, 0.32) 100%);
   z-index: 1;
 }
 .main-slider-corporate .container {
@@ -249,9 +278,9 @@ select:focus-visible {
   display: inline-flex;
   align-items: center;
   gap: 10px;
-  background-color: rgba(109, 150, 61, 0.2);
-  border: 1px solid rgba(109, 150, 61, 0.4);
-  color: #A8D377;
+  background-color: rgba(221, 4, 41, 0.15);
+  border: 1px solid rgba(221, 4, 41, 0.45);
+  color: #ff546d;
   padding: 6px 16px;
   border-radius: 50px;
   font-size: 13px;
@@ -261,7 +290,7 @@ select:focus-visible {
   margin-bottom: 24px;
 }
 .hero-tagline i {
-  color: var(--neha-green-light);
+  color: #ff546d;
 }
 
 .hero-title {
@@ -312,7 +341,7 @@ select:focus-visible {
 }
 .hero-badge-item i {
   font-size: 24px;
-  color: var(--neha-green);
+  color: var(--neha-red);
 }
 .hero-badge-item .badge-text h4 {
   color: #FFFFFF;
@@ -321,7 +350,7 @@ select:focus-visible {
   font-weight: 700;
 }
 .hero-badge-item .badge-text p {
-  color: #9BA9B8;
+  color: #A0ABB5;
   font-size: 13px;
   margin: 0;
 }
@@ -335,23 +364,23 @@ select:focus-visible {
 }
 .feature-four__single:hover {
   transform: translateY(-5px);
-  border-color: var(--neha-green);
-  box-shadow: 0 10px 25px rgba(18, 38, 58, 0.08);
+  border-color: var(--neha-red);
+  box-shadow: 0 10px 25px rgba(221, 4, 41, 0.08);
 }
 .feature-four__single .icon-box span {
-  color: var(--neha-green) !important;
+  color: var(--neha-red) !important;
 }
 
 /* Section Titles */
 .sec-title h2,
 .sec-title-two h2 {
-  color: var(--neha-navy) !important;
+  color: var(--neha-black) !important;
   font-size: 38px;
   line-height: 1.25;
   font-weight: 800;
 }
 .sec-title-two .sub-title h3 {
-  color: var(--neha-green) !important;
+  color: var(--neha-red) !important;
   text-transform: uppercase;
   letter-spacing: 0.1em;
   font-size: 14px;
@@ -359,7 +388,7 @@ select:focus-visible {
 }
 .sec-title-two .sub-title .round-two,
 .sec-title-two .sub-title .round-one {
-  background-color: var(--neha-green) !important;
+  background-color: var(--neha-red) !important;
 }
 
 /* Service Cards */
@@ -374,9 +403,9 @@ select:focus-visible {
   transition: all 0.3s ease;
 }
 .service-card-premium:hover {
-  border-color: var(--neha-green);
+  border-color: var(--neha-red);
   transform: translateY(-4px);
-  box-shadow: 0 12px 30px rgba(18, 38, 58, 0.08);
+  box-shadow: 0 12px 30px rgba(221, 4, 41, 0.1);
 }
 .service-card-premium .card-img {
   position: relative;
@@ -400,7 +429,7 @@ select:focus-visible {
 }
 .service-card-premium .card-title {
   font-size: 20px;
-  color: var(--neha-navy);
+  color: var(--neha-black);
   margin-bottom: 12px;
   font-weight: 700;
 }
@@ -412,7 +441,7 @@ select:focus-visible {
   flex-grow: 1;
 }
 .service-card-premium .card-link {
-  color: var(--neha-green);
+  color: var(--neha-red);
   font-weight: 600;
   font-size: 14px;
   text-transform: uppercase;
@@ -423,7 +452,7 @@ select:focus-visible {
   transition: gap 0.2s ease;
 }
 .service-card-premium:hover .card-link {
-  color: var(--neha-navy);
+  color: var(--neha-black);
   gap: 12px;
 }
 
@@ -439,15 +468,15 @@ select:focus-visible {
   transition: all 0.3s ease;
 }
 .project-card-premium:hover {
-  border-color: var(--neha-green);
+  border-color: var(--neha-red);
   transform: translateY(-4px);
-  box-shadow: 0 12px 30px rgba(18, 38, 58, 0.08);
+  box-shadow: 0 12px 30px rgba(221, 4, 41, 0.1);
 }
 .project-card-premium .project-img {
   position: relative;
   height: 230px;
   overflow: hidden;
-  background-color: var(--neha-navy);
+  background-color: var(--neha-black);
 }
 .project-card-premium .project-img img {
   width: 100%;
@@ -462,7 +491,7 @@ select:focus-visible {
   position: absolute;
   top: 14px;
   left: 14px;
-  background-color: var(--neha-navy);
+  background-color: var(--neha-black);
   color: #FFFFFF;
   font-size: 11px;
   font-weight: 700;
@@ -472,12 +501,13 @@ select:focus-visible {
   border-radius: 3px;
   z-index: 2;
   box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+  border-left: 2px solid var(--neha-red);
 }
 .project-card-premium .illustrative-label {
   position: absolute;
   bottom: 8px;
   right: 8px;
-  background: rgba(18, 38, 58, 0.75);
+  background: rgba(26, 26, 26, 0.78);
   color: #DDE2E7;
   font-size: 10px;
   padding: 2px 6px;
@@ -493,7 +523,7 @@ select:focus-visible {
 }
 .project-card-premium .project-title {
   font-size: 19px;
-  color: var(--neha-navy);
+  color: var(--neha-black);
   margin-bottom: 8px;
   font-weight: 700;
 }
@@ -502,7 +532,7 @@ select:focus-visible {
   align-items: center;
   gap: 10px;
   font-size: 13px;
-  color: var(--neha-green);
+  color: var(--neha-red);
   font-weight: 600;
   margin-bottom: 12px;
 }
@@ -521,23 +551,23 @@ select:focus-visible {
   align-items: center;
 }
 .project-card-premium .project-footer a {
-  color: var(--neha-navy);
+  color: var(--neha-black);
   font-weight: 600;
   font-size: 13px;
   text-transform: uppercase;
 }
 .project-card-premium .project-footer a:hover {
-  color: var(--neha-green);
+  color: var(--neha-red);
 }
 
 /* Verified Leadership Card */
 .leadership-verified-card {
   background: #FFFFFF;
   border: 1px solid var(--neha-border);
-  border-left: 4px solid var(--neha-green);
+  border-left: 4px solid var(--neha-red);
   border-radius: 6px;
   padding: 35px;
-  box-shadow: 0 4px 20px rgba(18, 38, 58, 0.05);
+  box-shadow: 0 4px 20px rgba(26, 26, 26, 0.05);
 }
 .leadership-header {
   display: flex;
@@ -549,8 +579,8 @@ select:focus-visible {
   width: 72px;
   height: 72px;
   border-radius: 50%;
-  background-color: var(--neha-navy);
-  color: var(--neha-green);
+  background-color: var(--neha-black);
+  color: var(--neha-red);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -561,10 +591,10 @@ select:focus-visible {
 .leadership-info h3 {
   font-size: 24px;
   margin-bottom: 4px;
-  color: var(--neha-navy);
+  color: var(--neha-black);
 }
 .leadership-info p {
-  color: var(--neha-green);
+  color: var(--neha-red);
   font-weight: 600;
   font-size: 15px;
   margin: 0;
@@ -588,15 +618,15 @@ select:focus-visible {
 }
 .capability-pillar-card:hover {
   background: #FFFFFF;
-  border-color: var(--neha-green);
-  box-shadow: 0 8px 24px rgba(18, 38, 58, 0.06);
+  border-color: var(--neha-red);
+  box-shadow: 0 8px 24px rgba(221, 4, 41, 0.08);
 }
 .capability-pillar-card .pillar-icon {
   width: 48px;
   height: 48px;
   border-radius: 6px;
-  background-color: var(--neha-navy);
-  color: var(--neha-green);
+  background-color: var(--neha-black);
+  color: var(--neha-red);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -606,7 +636,7 @@ select:focus-visible {
 .capability-pillar-card h4 {
   font-size: 18px;
   margin-bottom: 10px;
-  color: var(--neha-navy);
+  color: var(--neha-black);
 }
 .capability-pillar-card p {
   font-size: 14px;
@@ -617,7 +647,7 @@ select:focus-visible {
 
 /* CTA Consultation Section */
 .cta-corporate {
-  background-color: var(--neha-navy);
+  background-color: var(--neha-black);
   color: #FFFFFF;
   padding: 70px 0;
   position: relative;
@@ -627,7 +657,7 @@ select:focus-visible {
   content: '';
   position: absolute;
   top: 0; right: 0; bottom: 0; width: 35%;
-  background: linear-gradient(90deg, transparent, rgba(109, 150, 61, 0.08));
+  background: linear-gradient(90deg, transparent, rgba(221, 4, 41, 0.08));
   pointer-events: none;
 }
 .cta-corporate h2 {
@@ -645,7 +675,7 @@ select:focus-visible {
 
 /* Footer Corporate */
 .footer-one {
-  background-color: var(--neha-navy) !important;
+  background-color: var(--neha-black) !important;
   color: #DDE2E7;
   padding-top: 70px;
 }
@@ -670,7 +700,7 @@ select:focus-visible {
   left: 0;
   width: 36px;
   height: 2px;
-  background-color: var(--neha-green);
+  background-color: var(--neha-red);
 }
 .footer-widget__single-list li a {
   color: #9BA9B8 !important;
@@ -678,7 +708,7 @@ select:focus-visible {
   transition: all 0.2s ease;
 }
 .footer-widget__single-list li a:hover {
-  color: var(--neha-green) !important;
+  color: var(--neha-red) !important;
   padding-left: 6px;
 }
 .footer-widget__single-contact p {
@@ -691,12 +721,13 @@ select:focus-visible {
   font-weight: 600;
 }
 .footer-widget__single-contact a:hover {
-  color: var(--neha-green) !important;
+  color: var(--neha-red) !important;
 }
 
 .footer-compliance-box {
   background: rgba(255, 255, 255, 0.05);
   border: 1px solid rgba(255, 255, 255, 0.1);
+  border-left: 3px solid var(--neha-red);
   border-radius: 4px;
   padding: 16px;
   font-size: 13px;
@@ -708,7 +739,7 @@ select:focus-visible {
 }
 
 .footer-one__bottom {
-  background-color: var(--neha-navy-dark) !important;
+  background-color: var(--neha-black-dark) !important;
   border-top: 1px solid rgba(255, 255, 255, 0.06);
   padding: 20px 0;
 }
@@ -721,7 +752,7 @@ select:focus-visible {
   font-size: 13px;
 }
 .footer-one__bottom-menu li a:hover {
-  color: var(--neha-green) !important;
+  color: var(--neha-red) !important;
 }
 
 /* Working Honest Contact Form UX */
@@ -729,7 +760,7 @@ select:focus-visible {
   display: none;
   position: fixed;
   top: 0; left: 0; right: 0; bottom: 0;
-  background: rgba(18, 38, 58, 0.85);
+  background: rgba(18, 20, 24, 0.85);
   backdrop-filter: blur(4px);
   z-index: 99999;
   justify-content: center;
@@ -748,13 +779,14 @@ select:focus-visible {
   box-shadow: 0 20px 40px rgba(0,0,0,0.3);
   text-align: center;
   position: relative;
+  border-top: 4px solid var(--neha-red);
 }
 .contact-feedback-icon {
   width: 64px;
   height: 64px;
   border-radius: 50%;
-  background: rgba(109, 150, 61, 0.12);
-  color: var(--neha-green);
+  background: rgba(221, 4, 41, 0.1);
+  color: var(--neha-red);
   font-size: 32px;
   display: flex;
   align-items: center;
@@ -763,7 +795,7 @@ select:focus-visible {
 }
 .contact-feedback-card h3 {
   font-size: 24px;
-  color: var(--neha-navy);
+  color: var(--neha-black);
   margin-bottom: 12px;
 }
 .contact-feedback-card p {
@@ -794,7 +826,7 @@ select:focus-visible {
   background-color: #1EBE5D;
 }
 .email-send-btn {
-  background-color: var(--neha-navy);
+  background-color: var(--neha-black);
   color: #FFFFFF !important;
   font-weight: 600;
   padding: 12px 20px;
@@ -807,7 +839,7 @@ select:focus-visible {
   transition: background-color 0.2s ease;
 }
 .email-send-btn:hover {
-  background-color: var(--neha-navy-light);
+  background-color: var(--neha-red);
 }
 .modal-close-btn {
   background: transparent;
@@ -820,7 +852,7 @@ select:focus-visible {
 }
 .modal-close-btn:hover {
   background: var(--neha-concrete);
-  color: var(--neha-navy);
+  color: var(--neha-black);
 }
 
 /* Clean Form Inputs */
@@ -836,9 +868,9 @@ select:focus-visible {
 }
 .comment-form__input-box input:focus,
 .comment-form__input-box textarea:focus {
-  border-color: var(--neha-green) !important;
+  border-color: var(--neha-red) !important;
   background-color: #FFFFFF !important;
-  box-shadow: 0 0 0 3px rgba(109, 150, 61, 0.15) !important;
+  box-shadow: 0 0 0 3px rgba(221, 4, 41, 0.15) !important;
 }
 
 /* Responsive adjustments */
@@ -850,3 +882,20 @@ select:focus-visible {
     padding: 15px 0;
   }
 }
+
+/* Authentic Brand Utility Overrides */
+.text-brand,
+.text-success:not(.whatsapp-send-btn):not(.btn-whatsapp):not(.badge-whatsapp) {
+  color: var(--thm-base) !important;
+}
+.border-success {
+  border-color: var(--thm-base) !important;
+}
+.bg-success:not(.whatsapp-send-btn):not(.btn-whatsapp):not(.badge-whatsapp) {
+  background-color: var(--thm-base) !important;
+}
+.badge-brand {
+  background-color: rgba(221, 4, 41, 0.12) !important;
+  color: var(--thm-base) !important;
+}
+
