@@ -57,19 +57,24 @@ The website consists of a focused 5-item primary navigation:
 4. **Projects (`portfolio.html` & `portfolio-details.html`)**: Documented public engineering packages across Karnataka with transparent illustrative representation tags and the Thimmapur LIS case study.
 5. **Contact (`contact.html`)**: Verified Bangalore office details, embedded interactive Bangalore map, and validated enquiry dispatch.
 6. **Support & Admin (`404.html`, `leads.html`)**:
-   - `404.html`: Custom branded error page for broken URLs.
-   - `leads.html`: Offline/client-side CRM console logging incoming estimate inquiries and pageview traffic.
+   - `404.html`: Custom branded error page with GitHub Pages clean-URL routing.
+   - `leads.html`: Protected security notice and production architecture guide for Supabase Row Level Security (RLS) integration. Legacy client-side CRM has been decommissioned.
 
 ---
 
-## 4. Honest Enquiry Flow & Client Handover
+## 4. Security Architecture & Reliable Enquiry Workflow
 
-- Inquiries submitted via `contact.html` or inline estimate forms trigger client-side validation (minimum name length, regex email check, valid phone number).
-- The inquiry details are immediately logged to `localStorage.getItem('crm_leads')` for tracking in `leads.html`.
-- A modal opens presenting the visitor with prefilled direct dispatch links:
-  - **WhatsApp Direct:** Opens `https://wa.me/919845221414?text=...` with formatted project scope.
-  - **Email Direct:** Opens `mailto:nehainfra@yahoo.com?subject=...&body=...` prefilled draft.
-- **Zero fake server responses:** No misleading success notices when no backend is configured.
+- **Security & Privacy Protection**: In compliance with enterprise standards, client-side browser CRM operations, hardcoded passcodes, and unencrypted local browser storage of personal identifying information (`localStorage.crm_leads`) have been removed. Residual tracking keys are automatically purged.
+- **Enquiry Validation**: Inquiries submitted via `contact.html` trigger accessible inline validation (name length, valid phone digits, RFC 5322 regex email when supplied, and project scope details).
+- **Anti-Duplicate Controls**: Submit actions immediately debounce and disable the submit trigger with an animated loading indicator.
+- **Delivery Channels**:
+  - **Automated Service (Configurable)**: Can be activated by setting `window.NEHA_CONFIG.formspreeEndpoint` in `assets/js/neha-enquiry.js`. Success/error states reflect real HTTP responses.
+  - **Direct Verified Channels (Default on GitHub Pages)**: Transparently routes enquiries to management via verified **WhatsApp Business (+91 98452 21414)** and official **Email (nehainfra@yahoo.com)** with pre-formatted contract specifications.
+- **Production CRM Activation (Supabase RLS)**:
+  - Table: `public.leads` (`id`, `created_at`, `client_name`, `phone`, `email`, `service_category`, `scope_details`, `status`).
+  - Public policy: `INSERT` allowed for `anon` role (form submissions only).
+  - Administration policy: `SELECT`, `UPDATE`, `DELETE` restricted to authenticated staff (`@nehainfra.com`).
+  - Secret Isolation: Database service-role keys and passwords are strictly kept out of frontend source control.
 
 ---
 
