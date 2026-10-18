@@ -357,15 +357,39 @@ select:focus-visible {
 
 /* Feature 4 Section / Quick Capability Bar */
 .feature-four__single {
+  position: relative;
+  overflow: hidden;
   background-color: #FFFFFF;
   border: 1px solid var(--neha-border);
-  border-radius: 6px;
-  transition: all 0.3s ease;
+  border-radius: 8px;
+  transition: all 0.35s ease;
+  z-index: 1;
+}
+.feature-four__bg-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-size: cover;
+  background-position: center;
+  opacity: 0.15;
+  transition: opacity 0.4s ease, transform 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+  z-index: 0;
+  pointer-events: none;
+}
+.feature-four__content-wrap {
+  position: relative;
+  z-index: 2;
 }
 .feature-four__single:hover {
   transform: translateY(-5px);
   border-color: var(--neha-red);
-  box-shadow: 0 10px 25px rgba(221, 4, 41, 0.08);
+  box-shadow: 0 12px 30px rgba(221, 4, 41, 0.12);
+}
+.feature-four__single:hover .feature-four__bg-image {
+  opacity: 0.25;
+  transform: scale(1.08);
 }
 .feature-four__single .icon-box span {
   color: var(--neha-red) !important;

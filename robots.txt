@@ -1,7 +1,5 @@
 User-agent: *
 Allow: /
-Disallow: /leads.html
-Disallow: /leads
 
 Sitemap: https://cherry6272.github.io/Neha-Infra/sitemap.xml
 

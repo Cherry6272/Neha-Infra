@@ -23,8 +23,6 @@ Corporate engineering and civil contracting website for **M/s Neha Infrastructur
 | **Registration Authority** | Chief Engineer, Communication & Buildings (South), PWD, Bangalore |
 | **GSTIN** | `29AGMPR8103R1ZF` |
 | **Registered Office** | `#02, 1st Floor, Rangasri, Canara Bank Layout, Bangalore – 560097, Karnataka, India` |
-| **Official Telephone** | `+91 98452 21414` |
-| **Direct WhatsApp Channel** | `+91 98452 21414` (`https://wa.me/919845221414`) |
 | **Official Email** | `nehainfra@yahoo.com` |
 
 ---
@@ -54,22 +52,20 @@ The website consists of a focused 5-item primary navigation:
    - `lift-irrigation.html` (Canal lining, jackwells, delivery chambers, KNNL hydraulic works)
    - `composite-housing.html` (Township layout formation, underground utilities, sites & services schemes)
    - `civil-earthworks.html` (Bulk cut-and-fill balancing, railway formations, site leveling)
-4. **Projects (`portfolio.html` & `portfolio-details.html`)**: Documented public engineering packages across Karnataka with transparent illustrative representation tags and the Thimmapur LIS case study.
+4. **Projects (`portfolio.html` & `portfolio-details.html`)**: Documented public engineering packages across Karnataka with detailed project pages.
 5. **Contact (`contact.html`)**: Verified Bangalore office details, embedded interactive Bangalore map, and validated enquiry dispatch.
-6. **Support & Admin (`404.html`, `leads.html`)**:
-   - `404.html`: Custom branded error page with GitHub Pages clean-URL routing.
-   - `leads.html`: Protected security notice and production architecture guide for Supabase Row Level Security (RLS) integration. Legacy client-side CRM has been decommissioned.
+6. **Support (`404.html`)**: Custom branded error page with GitHub Pages clean-URL routing.
 
 ---
 
-## 4. Security Architecture & Reliable Enquiry Workflow
+## 4. Reliable Enquiry Workflow
 
-- **Security & Privacy Protection**: In compliance with enterprise standards, client-side browser CRM operations, hardcoded passcodes, and unencrypted local browser storage of personal identifying information (`localStorage.crm_leads`) have been removed. Residual tracking keys are automatically purged.
-- **Enquiry Validation**: Inquiries submitted via `contact.html` trigger accessible inline validation (name length, valid phone digits, RFC 5322 regex email when supplied, and project scope details).
+- **Security & Privacy Protection**: Client-side browser CRM operations, hardcoded passcodes, and unencrypted local browser storage have been eliminated.
+- **Enquiry Validation**: Inquiries submitted via `contact.html` trigger accessible inline validation (name length, RFC 5322 regex email, and project scope details).
 - **Anti-Duplicate Controls**: Submit actions immediately debounce and disable the submit trigger with an animated loading indicator.
 - **Delivery Channels**:
   - **Automated Service (Configurable)**: Can be activated by setting `window.NEHA_CONFIG.formspreeEndpoint` in `assets/js/neha-enquiry.js`. Success/error states reflect real HTTP responses.
-  - **Direct Verified Channels (Default on GitHub Pages)**: Transparently routes enquiries to management via verified **WhatsApp Business (+91 98452 21414)** and official **Email (nehainfra@yahoo.com)** with pre-formatted contract specifications.
+  - **Direct Verified Email (Default on GitHub Pages)**: Transparently routes enquiries directly to official email (`nehainfra@yahoo.com`) with pre-formatted contract specifications.
 - **Production CRM Activation (Supabase RLS)**:
   - Table: `public.leads` (`id`, `created_at`, `client_name`, `phone`, `email`, `service_category`, `scope_details`, `status`).
   - Public policy: `INSERT` allowed for `anon` role (form submissions only).
@@ -117,5 +113,5 @@ The website is preconfigured for automatic GitHub Pages deployment directly from
 
 The following items are preserved from existing records and recommended for company validation during client review:
 1. **Project Historical Values:** The contract values (e.g., Thimmapur LIS at ₹12,221 Lakhs, Prashanti Kuteeram at ₹1350 Lakhs) reflect existing portfolio archives.
-2. **Photography Replacement:** Where authentic company site photographs become available in the future, simply place high-resolution photos in `assets/images/project/` using the established filenames to replace the illustrative stock representations.
+2. **Photography Assets:** Where authentic on-site company project photographs become available in the future, simply place high-resolution photos in `assets/images/project/` using the established filenames.
 3. **Class-I Renewal:** Registration certificate `CBS/C1/CIVIL/2933/2015` renewal status should be updated if a newer renewal endorsement has been issued by PWD Karnataka.
